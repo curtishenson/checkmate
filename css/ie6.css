@@ -1,0 +1,8 @@
+.menu ul li { height:35px; } 
+.menu ul li a { float: left; height:35px; }
+
+.header h1 a:visited { color: #fff;}
+
+.archive form { display: inline;}
+
+.sidebar { padding-top: 1.5em; }

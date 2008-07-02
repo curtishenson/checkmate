@@ -1,0 +1,16 @@
+version 1.01 
+	- Added wp_footer() hook
+	
+version 1.02
+	- Fixed header image bug
+	- RSS feeds detectable by browser ( RSS2, RSS1/RDF, RSS0.92, ATOM, RSS2 Comments )
+	
+version 1.03
+	- Added page template including comments
+	
+version 1.04
+	- Fixed sidebar error when requiring users to be registered and logged in to comment
+	- Misc. code cleanup
+	
+version 1.05
+	- removed query_posts from index.php for pagination support
