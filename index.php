@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <div class="container content">
-		
+
 	<div class="span-14">
 		<?php	
 		$feature = get_option('cm_feature');  // Gets the option from theme options page
@@ -9,7 +9,7 @@
 				
 				$featureId = get_option('cm_featureId'); //retrieves feature category ID number from options page
 		 		global $post;
-		 		$featureposts = query_posts('showposts=1&cat='.$featureId);
+		 		$featureposts = get_posts('numberposts=1&category='.$featureId);
 		 		foreach($featureposts as $post) :
 		 		setup_postdata($post);
 				$feature_post = $post->ID;
@@ -35,7 +35,7 @@
 		
 		<div class="blog">
 			
-			<?php
+			<?php			
 			if(have_posts()):
 			while(have_posts()) : the_post();
 			if( $post->ID == $feature_post ) continue; update_post_caches($posts);
