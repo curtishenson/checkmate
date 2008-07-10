@@ -9,7 +9,7 @@
 				
 				$featureId = get_option('cm_featureId'); //retrieves feature category ID number from options page
 		 		global $post;
-		 		$featureposts = get_posts('numberposts=1&include='.$featureId);
+		 		$featureposts = query_posts('showposts=1&cat='.$featureId);
 		 		foreach($featureposts as $post) :
 		 		setup_postdata($post);
 				$feature_post = $post->ID;
