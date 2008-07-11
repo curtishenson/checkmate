@@ -14,3 +14,7 @@ version 1.04
 	
 version 1.05
 	- removed query_posts from index.php for pagination support
+	
+version 1.06
+	- Changed "1 Comments" to "1 Comment"
+	- Fixed the multiple categories as "featured" categories error
