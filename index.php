@@ -1,37 +1,16 @@
 <?php get_header(); ?>
 <div class="container content">
-
+		
 	<div class="span-14">
 		<?php	
 		$feature = get_option('cm_feature');  // Gets the option from theme options page
 			if($feature == 'No') { }
 			if($feature == 'Yes') { 
 				
-				$featureId = get_option('cm_featureId'); //retrieves feature category ID number from options page
-		 		global $post;
-		 		$featureposts = get_posts('numberposts=1&category='.$featureId);
-		 		foreach($featureposts as $post) :
-		 		setup_postdata($post);
-				$feature_post = $post->ID;
-		 		?>
-			<div class="feature clearfix">
-				
-				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<p class="meta">
-					Posted on <?php the_time('M j, Y'); ?> by <?php the_author_posts_link(); ?></a>
-				</p>
-					<?php //get thumbnail (custom field)  
-					$featureimage = get_post_meta($post->ID, 'feature_image', true); ?>
-					<?php if($featureimage !== '') { ?>
-						<a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>">
-						<img src="<?php echo $featureimage; ?>" alt="<?php the_title(); ?>" /></a>
-					<?php } else { } ?>
-					<?php the_content('Continue Reading'); ?>
-				
-			</div>
-		 <?php endforeach; 
-		  } // ends feature if statement ?>
-		
+			cm_feature_post();
+		 	$feature_post = $post->ID;
+		  	} 
+		?>
 		
 		<div class="blog">
 			
@@ -104,4 +83,5 @@
 	<?php } ?>
 	
 </div>
+
 <?php get_footer(); ?>
