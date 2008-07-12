@@ -31,6 +31,8 @@
 	<?php } //Archive Header
 		else { ?>
 		<h2>You are viewing the Archives</h2>
+		<?php } ?>
+		
 		<div>
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
 		  	<option value=""><?php echo attribute_escape(__('View By Month')); ?></option> 
@@ -49,7 +51,6 @@
 				<noscript><input type="submit" value="View" /></noscript>
 			</form>
 		</div>
-		<?php } ?>
 		
 		<div class="blog span-14">
 			
@@ -60,7 +61,7 @@
 				<div class="span-3 meta">
 					<ul>
 						<li><?php the_time('M j, Y') ?></li>
-						<li><a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?> Comments</a></li>
+						<li><a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
 						<?php //get thumbnail (custom field)  
 						$post_thumb = get_post_meta($post->ID, 'post_thumb', true); ?>
 						<?php if($post_thumb !== '') { ?>

@@ -24,7 +24,7 @@
 			<div class="span-3 meta">
 				<ul>
 					<li><?php the_time('M j, Y') ?></li>
-					<li><a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?> Comments</a></li>
+					<li><a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
 					<?php //get thumbnail (custom field)  
 					$post_thumb = get_post_meta($post->ID, 'post_thumb', true); ?>
 					<?php if($post_thumb !== '') { ?>
