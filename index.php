@@ -8,7 +8,6 @@
 			if($feature == 'Yes') { 
 				
 			cm_feature_post();
-		 	$feature_post = $post->ID;
 		  	} 
 		?>
 		
