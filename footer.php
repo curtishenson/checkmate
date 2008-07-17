@@ -28,11 +28,15 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery-1.2.3.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.curvycorners.packed.js"></script> 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.color.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/tabber-min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/cm_javascript.js"></script>
+<script type="text/javascript">
+	searchInput("Type and hit enter to search");
+	emailInput("Enter your email and hit enter");
+</script>
 
 <?php wp_footer(); ?>
 

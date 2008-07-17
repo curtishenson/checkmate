@@ -1,17 +1,26 @@
-$(document).ready(function(){
-	//Search Field
-	$("#input_search").val("Type and hit enter to search").css({"color":"#999"});
-		$("#input_search").one("focus",function(){
-			$(this).val("").css({"color":"#5a5a5a"});
-		});
-	$("div.header form label").hide();
-	
-	//Subscribe via Email Field
-	$("#input_subscribe").val("Enter your email and hit enter").css({"color":"#999"});
+//Search Field
+function searchInput(text){
+	$(document).ready(function(){
+		$("#input_search").val(text).css({"color":"#999"});
+			$("#input_search").one("focus",function(){
+				$(this).val("").css({"color":"#5a5a5a"});
+			});
+		$("div.header form label").hide();
+	});
+};
+
+//Subscribe via Email Field
+function emailInput(text){
+	$(document).ready(function(){
+		$("#input_subscribe").val(text).css({"color":"#999"});
 		$("#input_subscribe").one("focus",function(){
 			$(this).val("").css({"color":"#5a5a5a"});
 		});
-	
+	});
+};
+
+$(document).ready(function(){
+
 	//rounded corners on feature
 	$('.feature').corner({
 		tl: { radius: 10 },

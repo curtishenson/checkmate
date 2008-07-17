@@ -7,7 +7,7 @@
 			
 			<h2><?php the_title(); ?></h2>
 			<p class="meta">
-				Posted on <?php the_time('M j, Y'); ?> by <?php the_author_posts_link(); ?> in <?php the_category(', '); ?> | <a href="#comments"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a> <?php edit_post_link('Edit Post', '| '); ?>
+				<?php printf(__('Posted on %1$s by %2$s in %3$s','checkmate'), get_the_time(__('M j, Y','checkmate')), get_the_author_posts_link(), get_the_category_list(', ')); ?> | <a href="#comments"><?php comments_number(__('0 Comments','checkmate'), __('1 Comment','checkmate'), __('% Comments','checkmate')); ?></a> <?php edit_post_link((__('Edit Post','checkmate')), '| '); ?>
 			</p>
 			
 			<div class="post append-1 last">
