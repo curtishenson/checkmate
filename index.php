@@ -5,7 +5,7 @@
 		<?php	
 		$feature = get_option('cm_feature');  // Gets the option from theme options page
 			if($feature == 'No') { }
-			if($feature == 'Yes') { 
+			if(($feature == 'Yes') && !(is_paged()) ) { 
 				
 			cm_feature_post();
 		  	} 
@@ -20,29 +20,26 @@
 			?>
 		
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-			<div class="span-3 meta">
+			
+			<div class="meta">
 				<ul>
-					<li><?php the_time('M j, Y') ?></li>
-					<li><a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
-					<?php //get thumbnail (custom field)  
-					$post_thumb = get_post_meta($post->ID, 'post_thumb', true); ?>
-					<?php if($post_thumb !== '') { ?>
-						
-					<?php // If you wish to not use the TimThumb Script you can use the following line instead
-				/*	<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><img src="<?php echo $post_thumb; ?>" alt="<?php the_title(); ?>" /></a></li> */ ?>
-				
-					<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><img src="<?php bloginfo('template_directory'); ?>/scripts/timthumb.php?src=<?php echo $post_thumb; ?>&w=110&zc=1" alt="" /></a></li>
-					
-					
-					<?php } else { } ?>
+					<li class="date">Posted On <?php the_time('M j, Y') ?></li>
+					<li class="comment"> | <a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
 				</ul>
 			</div>
 			
-			<div class="post span-11 last">
-				<?php the_content('Continue...'); ?>
+			<div class="post">
+				<?php the_content('Continue Reading'); ?>
 			</div>
 			
 			<?php endwhile; ?>
+			
+			<div class="navigation clearfix">
+				<span class="alignleft"><?php posts_nav_link('','','&laquo; Previous Entries') ?></span>
+				<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
+			</div>
+			
+			
 			<?php  else : ?>
 				
 				<h2>Not Found</h2>
@@ -52,18 +49,6 @@
 			<?php endif;?>
 
 		</div><!-- closes blog -->
-		
-		<div class="span-7">
-			<?php if ( !function_exists('dynamic_sidebar')
-			        || !dynamic_sidebar('Index Bottom Left') ) : 
-			endif; ?>
-		</div>
-		
-		<div class="span-7 last">
-			<?php if ( !function_exists('dynamic_sidebar')
-			        || !dynamic_sidebar('Index Bottom Right') ) : 
-			endif; ?>
-		</div>
 		
 	</div><!-- close left side -->
 	

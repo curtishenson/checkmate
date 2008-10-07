@@ -32,6 +32,7 @@
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.curvycorners.packed.js"></script> 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.color.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/tabber-min.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/superfish.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/cm_javascript.js"></script>
 <script type="text/javascript">
 	searchInput("Type and hit enter to search");

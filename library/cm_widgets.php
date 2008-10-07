@@ -94,28 +94,6 @@ function cm_widget_welcome_register() {
 cm_widget_welcome_register();
 //END WELCOME BOX
 
-
-//News List Widget- displays stories from a news category
-function widget_news_list() {
-?>
-<div class="widget widget_news_list">
-	<h3>News</h3>
-	<?php query_posts('category_name=news&showposts=8'); // gets 8 posts from the news category ?>
-		<ul>
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-		<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> - <small><?php the_time('F j, Y'); ?></small></li>
-	<?php endwhile; else: ?>
-		<li>There is no news at this time</li>
-	<?php endif; ?>
-		</ul>
-</div>
-<?php
-}
-if ( function_exists('register_sidebar_widget') )
-	register_sidebar_widget(__('News List'), 'widget_news_list');
-// END NEWS WIDGET
-
-
 //Ads Widget 125x125 by 3
 function cm_widget_ads() {
 ?>
@@ -213,4 +191,132 @@ function ch_widget_tabcontent_register() {
 }
 	ch_widget_tabcontent_register();
 // thats it for the tabbed content boxes
+
+//CATEGORY WIDGET
+		function cm_widget_category( $args, $widget_args = 1 ) {
+			
+			extract( $args, EXTR_SKIP );
+			if ( is_numeric($widget_args) )
+				$widget_args = array( 'number' => $widget_args );
+			$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
+			extract( $widget_args, EXTR_SKIP );
+			
+			$options = get_option('widget_category');
+			if ( !isset($options[$number]) )
+				return;
+
+			$title = $options[$number]['title'];
+			$cat_name = $options[$number]['cat_name'];
+			
+		?>
+		<div class="widget widget_category">
+			<?php 	
+					$id = get_cat_id($cat_name);
+					$q = "showposts=5&cat=" . $id;
+					query_posts($q);
+			?>
+				<?php if ( !empty( $title ) ) { echo $before_title . $title . $after_title; } ?>
+					
+				<ul>
+					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+					<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> - <small><?php the_time('F j, Y'); ?></small></li>
+					<?php endwhile; else: ?>
+					<li>There are no posts at this time.</li>
+					<?php endif; ?>
+				</ul>
+			
+				<p class="more">
+					<?php 	$id = get_cat_id($cat_name); ?>
+					<a href="<?php echo get_category_link($id);?>" class="more-link">More <?php echo $title; ?></a>
+				</p>
+		</div>
+		<?php
+	}
+			
+		function cm_widget_category_control($widget_args) {
+			global $wp_registered_widgets;
+			static $updated = false;
+
+			if ( is_numeric($widget_args) )
+				$widget_args = array( 'number' => $widget_args );
+			$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
+			extract( $widget_args, EXTR_SKIP );
+
+			$options = get_option('widget_category');
+			if ( !is_array($options) )
+				$options = array();
+
+			if ( !$updated && !empty($_POST['sidebar']) ) {
+				$sidebar = (string) $_POST['sidebar'];
+
+				$sidebars_widgets = wp_get_sidebars_widgets();
+				if ( isset($sidebars_widgets[$sidebar]) )
+					$this_sidebar =& $sidebars_widgets[$sidebar];
+				else
+					$this_sidebar = array();
+
+				foreach ( $this_sidebar as $_widget_id ) {
+					if ( 'cm_widget_category' == $wp_registered_widgets[$_widget_id]['callback'] && isset($wp_registered_widgets[$_widget_id]['params'][0]['number']) ) {
+						$widget_number = $wp_registered_widgets[$_widget_id]['params'][0]['number'];
+						if ( !in_array( "cat_name-$widget_number", $_POST['widget-id'] ) ) // the widget has been removed.
+							unset($options[$widget_number]);
+					}
+				}
+
+				foreach ( (array) $_POST['widget-category'] as $widget_number => $widget_category ) {
+					$title = strip_tags(stripslashes($widget_category['title']));
+					$cat_name = strip_tags(stripslashes( $widget_category['cat_name']  ));
+					$options[$widget_number] = compact( 'title', 'cat_name' );
+				}
+
+				update_option('widget_category', $options);
+				$updated = true;
+			}
+
+			if ( -1 == $number ) {
+				$title = '';
+				$cat_name = '';
+				$number = '%i%';
+			} else {
+				$title = attribute_escape($options[$number]['title']);
+				$cat_name = format_to_edit($options[$number]['cat_name']);
+			}
+		?>
+				<p>
+					<label>Category Widget Title</label>
+					<input class="widefat" id="video-title-<?php echo $number; ?>" name="widget-category[<?php echo $number; ?>][title]" type="text" value="<?php echo $title; ?>" />
+					<label>Category Name</label>
+					<input class="widefat" id="video-cat_name-<?php echo $number; ?>" name="widget-category[<?php echo $number; ?>][cat_name]" type="text" value="<?php echo $cat_name; ?>" />
+					<input type="hidden" name="widget-category[<?php echo $number; ?>][submit]" value="1" />
+				</p>
+		<?php
+		}
+		
+		
+		function cm_widget_category_register() {
+			if ( !$options = get_option('widget_category') )
+				$options = array();
+			$widget_ops = array('classname' => 'widget_category', 'description' => __('Category Widget'));
+			$control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'category');
+			$name = __('CheckMate Category');
+
+			$id = false;
+			foreach ( array_keys($options) as $o ) {
+				// Old widgets can have null values for some reason
+				if ( !isset($options[$o]['title']) || !isset($options[$o]['cat_name']) )
+					continue;
+				$id = "category-$o"; // Never never never translate an id
+				wp_register_sidebar_widget($id, $name, 'cm_widget_category', $widget_ops, array( 'number' => $o ));
+				wp_register_widget_control($id, $name, 'cm_widget_category_control', $control_ops, array( 'number' => $o ));
+			}
+
+			// If there are none, we register the widget's existance with a generic template
+			if ( !$id ) {
+				wp_register_sidebar_widget( 'video-1', $name, 'cm_widget_category', $widget_ops, array( 'number' => -1 ) );
+				wp_register_widget_control( 'video-1', $name, 'cm_widget_category_control', $control_ops, array( 'number' => -1 ) );
+			}
+		}
+	
+		cm_widget_category_register();
+// END VIDEO WIDGET
 ?>

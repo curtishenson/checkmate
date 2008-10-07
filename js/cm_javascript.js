@@ -20,6 +20,11 @@ function emailInput(text){
 };
 
 $(document).ready(function(){
+	
+	//drop down menus
+	$('.menu ul').superfish({
+		dropShadows: false
+	}); 
 
 	//rounded corners on feature
 	$('.feature').corner({

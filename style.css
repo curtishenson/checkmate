@@ -22,26 +22,19 @@ ul {list-style-type: square;}
 
 .content { margin-top:2em;}
 
-/******  HEADER *****/
-.header { background-color: #222; color:#bbb; padding: 10px 10px 0; z-index: 2;}
-.header h1 { display: inline; font-weight: bold; float: left; font-size: 3.5em;}
-.header h1 a { text-decoration: none; color: #fff;}
-.header em { padding-left: 10px; float: left; margin-top: 1.8em;}
-.header fieldset { border: none; padding: 0px; margin: 0px; float: right;}
-.header input { margin-top: 1.1em; padding: 2px; border: 1px solid #999; background-color: #eee; width:230px;}
+p img { float: none; } 
 
-/****** MENU *******/
-.menu ul {list-style-type: none; font-family: Georgia, serif; font-size: 1.3em; margin: 5px 0 0; }
-.menu ul li { float:left; background: url("images/bracket_right.gif") right top no-repeat; min-height:35px; margin-right: 5px; }
-.menu ul li a { color: #555; padding: 0px 15px; text-decoration: none; display: block; background: url("images/bracket_left.gif") left top no-repeat; min-height:35px; }
-.menu ul li a:hover, .menu ul li:hover sub { color: #000;}
-.menu ul li sub {display: block; font-style: italic; color:#888; line-height: .2em;  }
-.menu ul li.current_page_item a, .menu ul li.current_page_item sub{ color: #000; }
+/******  HEADER *****/
+.header { background-color: #222; color:#bbb; padding: 1em 0px 1.5em; z-index: 2;}
+.header h1 { font-weight: bold; margin-bottom: 0px; font-size: 3.5em;}
+.header h1 a { text-decoration: none; color: #fff;}
+.header fieldset { border: none; padding: 0px; margin: 0px;}
+.header input { margin-top: 1.1em; padding: 2px; border: 1px solid #999; background-color: #eee; width:260px;}
 
 /**** RSS FEED ****/
-.rss { padding: 5px 0 0 70px; margin-bottom: 0; font-family: Georgia, serif; font-size: 1.7em; line-height: .9em; background: url("images/rss_large.gif") left top no-repeat; height: 45px; }
-.rss a { color: #F15A29; }
-.rss a:hover { color:#000;}
+.rss { padding: 0px 0 0 15px; background: url('images/feed_12.png') left no-repeat; margin-bottom: 0; font-family: Georgia, serif; font-size: 1em; }
+.rss a { color: #fb9d3a; text-decoration: none; font-weight: bold; }
+.rss a:hover { color:#FFF;}
 .rssoptions { font-family:  Georgia, serif; text-align: right;}
 .rssoptions ul { margin: 0; list-style-type: none; font-size: 1.2em; }
 .rssoptions ul li { display: inline;}
@@ -50,41 +43,62 @@ ul {list-style-type: square;}
 .rssoptions fieldset { border: none; padding: 0; margin-bottom: 0; }
 .rssoptions input { width: 200px; text-align: left;}
 
-/**** BIG HEADER ****/
-.big_header { margin-top: 2em; }
+/****** MENU *******/
+#subheader { background-color: #eee; border-bottom: 1px solid #ddd; border-top: 1px solid #999; }
+.menu { width: 950px; margin: 0 auto; }
+.menu ul { list-style-type: none; font-family: Georgia, serif; font-size: 1.3em; margin: 0; }
+.menu ul li { display: inline; margin-right: 0px; }
+.menu ul li a { color: #555; padding: 5px; text-decoration: none; border-left: 1px solid #ccc; }
+.menu ul li a:visited { color: #555; }
+.menu ul li a:hover, .sf-js-enabled a, .sf-js-enabled a:visited  { color: #000; }
+.menu ul li:last-child { border-right: 1px solid #ccc; }
+
+.sf-js-enabled { float: left; margin-bottom: 1em; }
+	.sf-js-enabled li li a { font-size: .7em; }
+.sf-js-enabled li li { background: #eee; border-bottom: 1px solid #999; }
+	.sf-js-enabled li li li { background: #eee; }
+.sf-js-enabled li:hover, .sf-js-enabled li.sfHover,
+.sf-js-enabled a:focus, .sf-js-enabled a:hover, .sf-js-enabled a:active { background:#aaa; outline:0; }
 
 /**** FEATURED ****/
 .feature { margin: 1em 0 2em; background-color: #222; color: #ddd; padding: 5px 10px;}
 .feature h2, .feature h2 a{ color: #fff; text-decoration: none; margin-bottom: 0px; }
-.feature h2 a:hover { color: #ccc;}
+	.feature h2 a:hover { color: #ccc;}
 .feature p.meta {text-indent: 0px; color: #ddd;}
-.feature p {text-indent: 20px;}
-.feature img { float: right; margin-bottom: 10px; margin-left: 10px; }
+	.feature img { float: right; margin-bottom: 10px; margin-left: 10px; }
 .feature a { color: #fff;}
-.feature a:hover { color: #aaa;}
-.feature .more-link { color: #ccc; display: block; margin-top: 1em; text-indent: 0px;}
-.feature a.more-link:hover { color: #fff;}
+	.feature a:hover { color: #aaa;}
+.feature .more-link { font-weight: bold; font-family: Georgia, serif; color: #aaa; border-top: 1px solid #555; background: none; padding-right: 0px; text-decoration: none; display: block; margin-top: 1em; text-align: right; }
+	.feature .more-link:hover { color: #FFF; }
 
 /**** BLOG ****/
-.meta ul { list-style-type: none; margin-left: 0px; margin-right: 0px; }
-.meta ul li { font-style: italic; font-family: Georgia, serif; color: #888; font-weight: bold;}
-.meta ul li a {color: #888; text-decoration: none; }
-.meta ul li a:hover { color: #000; text-decoration: underline;}
-.meta ul li img { max-width: 130px;}
-.blog h2 { font-weight: bold; clear: left; border-bottom: 1px solid #ccc;}
-.blog h2 a { text-decoration: none; color: #333;}
-.blog h2 a:hover { color: #888;}
+.meta ul { list-style-type: none; margin: 0px; margin-bottom: 1em; }
+.meta ul li { display: inline; font-style: italic; font-family: Georgia, serif; color: #888; font-weight: bold;}
+	.meta ul li a { color: #888; text-decoration: none; }
+		.meta ul li a:hover { color: #000; text-decoration: underline;}
+
+.blog h2 { font-weight: bold; clear: left; border-bottom: 1px solid #ccc; margin-bottom: 0px; }
+	.blog h2 a { text-decoration: none; color: #333;}
+		.blog h2 a:hover { color: #888;}
+
+.more-link { font-weight: bold; font-family: Georgia, serif; color: #777; border-top: 1px solid #eee; background: url('images/arrow.png') right 4px no-repeat; padding-right: 17px; text-decoration: none; display: block; margin-top: 1em; text-align: right; }
+	.more-link:hover { color: #000; }
+	
+.navigation { margin-top: 1em; margin-bottom: 1em; font-family: Georgia, serif; font-weight: bold; font-size: 1.2em; border-top: 2px solid #999; border-bottom: 1px solid #ccc; }
+	.navigation a { text-decoration: none; }
+		.navigation a:hover { color: #000; }
 
 /***** SINGLE ****/
+.single { margin-top: 3em; }
 .single h2 { margin-bottom: 0px;}
 .single h2+p { color: #888; font-style: italic; font-family: Georgia, serif; text-indent: 0px;}
-.single p{ text-indent: 2em;}
 .post ul, .post ol { padding-left: 20px;}
 .page-links { color: #000; margin-bottom: 1em; }
 .page-links a{ border: 1px solid #999; padding: 2px 5px; text-decoration: none; margin: 0 2px; }
 .page-links a:hover { background-color: #ddd; border-bottom: 1px solid #999; color: #000; }
 
 /**** ARCHIVE PAGE*****/
+.archive { margin-top: 2em; }
 .archive > h2 {margin-bottom: 0px;}
 .archive select + form { display: inline;}
 .archive select { border: 1px solid #ccc; color: #999; margin-bottom: 1.5em; }
@@ -98,7 +112,7 @@ ul {list-style-type: square;}
 .widget { margin-bottom: 1.5em;}
 .widget h3 { border-top: 2px solid #aaa; border-bottom: 1px solid #ccc; color: #888; padding: 2px 0; font-weight: bold; }
 .widget ul { margin: 0px; list-style-type: none;}
-.widget ul li { background: url("images/bullet.gif") left no-repeat; background-color: #fff; padding-left: 10px; }
+.widget ul li { background: url("images/bullet.gif") left 5px no-repeat; background-color: #fff; padding-left: 10px; }
 /* Custom Icon widgets */
 .widget_recent_entries ul li{ background: url("images/plus.gif") left no-repeat; padding-left: 15px;}
 .widget_categories ul li{ background: url("images/folder.png") left no-repeat; padding-left: 20px; }
@@ -114,6 +128,9 @@ ul {list-style-type: square;}
 /* Ads Widget */
 .ads { margin-bottom: 1.5em;}
 .ads img { float: left; margin-right: 5px;}
+/* Tags */
+.widget_tag_cloud a { text-decoration: none; color: #999; }
+	.widget_tag_cloud a:hover { color: #000; }
 
 /****** SIDEBAR *****/
 .sidebar { padding-top: 3em; }
@@ -159,7 +176,7 @@ ol#comments { list-style-type: none; margin: 0 0 1.5em 0; padding-left: 0px; }
 /***** MISC POST AND PAGE STYLES *****/
 /* You can use these to images and other elements inside posts or pages */
 .imageframe { margin: 10px; padding: 5px; border: 1px solid #aaa; }
-.alignleft { float: left; }
+.alignleft { float: left; margin-right: 10px; }
 .alignright { float: right; margin-left: 10px; }
 
 /***** TABBER TABBED CONTENT *****/
@@ -210,3 +227,55 @@ ul.tabbernav li.tabberactive a:hover { color: #555; background: #fff; }
 /* If desired, hide the heading since a heading is provided by the tab */
 .tabberlive .tabbertab h3 { display:none; }
 
+/*** DROPDOWN STYLES ***/
+.sf-js-enabled, .sf-js-enabled * {
+	margin:			0;
+	padding:		0;
+	list-style:		none;
+}
+.sf-js-enabled {
+	line-height:	1.0;
+}
+.sf-js-enabled ul {
+	position:		absolute;
+	top:			-999em;
+	width:			10em; /* left offset of submenus need to match (see below) */
+}
+.sf-js-enabled ul li {
+	width:			100%;
+}
+.sf-js-enabled li:hover {
+	visibility:		inherit; /* fixes IE7 'sticky bug' */
+}
+.sf-js-enabled li {
+	float:			left;
+	position:		relative;
+}
+.sf-js-enabled a {
+	display:		block;
+	position:		relative;
+}
+.sf-js-enabled li:hover ul,
+.sf-js-enabled li.sfHover ul {
+	left:			0;
+	top:			1.35em; /* match top ul list item height */
+	z-index:		99;
+}
+ul.sf-js-enabled li:hover li ul,
+ul.sf-js-enabled li.sfHover li ul {
+	top:			-999em;
+}
+ul.sf-js-enabled li li:hover ul,
+ul.sf-js-enabled li li.sfHover ul {
+	left:			10em; /* match ul width */
+	top:			0;
+}
+ul.sf-js-enabled li li:hover li ul,
+ul.sf-js-enabled li li.sfHover li ul {
+	top:			-999em;
+}
+ul.sf-js-enabled li li li:hover ul,
+ul.sf-js-enabled li li li.sfHover ul {
+	left:			10em; /* match ul width */
+	top:			0;
+}

@@ -9,23 +9,15 @@ $options = array (
             "std" => "Grey",
             "type" => "select",
 			"options" => array("Grey", "Red", "Blue", "Green", "Purple", "Brown", "Grey/Red")),
-	//HEADER IMAGE
-    array(    "name" => "Show Header Image",
-            "id" => $shortname."_header",
-            "std" => "",
-            "type" => "select",
-			"options" => array("Yes", "No")),
-		array(	"name" => "Header Image URL",
-				"id" => $shortname."_header_url",
-				"std" => "",
-				"type" => "text"),
+
 	//FEATURE STORY			
     array(   "name" => "Display Feature Story",
             "id" => $shortname."_feature",
             "std" => "Yes",
             "type" => "select",
 			"options" => array("Yes", "No")),
-		array(	"name" => "Feature Category ID*",
+		array(	"name" => "Feature Category ID",
+				"desc" => "Can be multiple categories. Uses a comma separated lists of page ID numbers. e.g. 2,7,12",
 				"id" => $shortname."_featureId",
 				"std" => 1,
 				"type" => "text"),
@@ -33,17 +25,25 @@ $options = array (
 	array ( "name" => "Feedburner Feed Address",
 			"id" => $shortname."_feedburner_address",
 			"std" => "",
-			"type" => "text"),
+			"type" => "text",
+			"style" => "width: 500px",
+			"row_style" => "background-color: #ffd7ad;" ),
 	array ( "name" => "Feedburner Comments Feed Address",
 			"id" => $shortname."_feedburner_comments",
 			"std" => "",
-			"type" => "text"),
-	array ( "name" => "Feedburner ID Number**",
+			"type" => "text",
+			"style" => "width: 500px",
+			"row_style" => "background-color: #ffd7ad;"),
+	array ( "name" => "Feedburner ID Number"		,
+			"desc" => "Your Feedburner ID is used for email subscriptions.",
 			"id" => $shortname."_feedburner_id",
 			"std" => "",
-			"type" => "text"),
+			"type" => "text",
+			"style" => "width: 200px;",
+			"row_style" => "background-color: #ffd7ad;"),
 	//MENU				
-	array ( "name" => "Pages to display in menu***",
+	array ( "name" => "Pages to display in menu",
+			"desc" => "Defaults to all pages. Uses a comma separated lists of page ID numbers. e.g. 1,2,5,6",
 			"id" => $shortname."_menu_pages",
 			"std" => "",
 			"type" => "text"),
@@ -94,7 +94,7 @@ $ads_options = array (
 
 function mytheme_add_admin() {
 
-    global $themename, $shortname, $options, $ads_options;
+    global $themename, $shortname, $options;
 
     if ( $_GET['page'] == basename(__FILE__) ) {
     
@@ -102,25 +102,19 @@ function mytheme_add_admin() {
 
                 foreach ($options as $value) {
                     update_option( $value['id'], $_REQUEST[ $value['id'] ] ); }
-					foreach ($ads_options as $value) {
-	                    update_option( $value['id'], $_REQUEST[ $value['id'] ] ); }
 
                 foreach ($options as $value) {
                     if( isset( $_REQUEST[ $value['id'] ] ) ) { update_option( $value['id'], $_REQUEST[ $value['id'] ]  ); } else { delete_option( $value['id'] ); } }
-					foreach ($ads_options as $value) {
-	                    if( isset( $_REQUEST[ $value['id'] ] ) ) { update_option( $value['id'], $_REQUEST[ $value['id'] ]  ); } else { delete_option( $value['id'] ); } }
 
-                header("Location: themes.php?page=functions.php&saved=true");
+                header("Location: themes.php?page=cm_theme_options.php&saved=true");
                 die;
 
         } else if( 'reset' == $_REQUEST['action'] ) {
 
             foreach ($options as $value) {
                 delete_option( $value['id'] ); }
-				foreach ($ads_options as $value) {
-	                delete_option( $value['id'] ); }
 
-            header("Location: themes.php?page=functions.php&reset=true");
+            header("Location: themes.php?page=cm_theme_options.php&reset=true");
             die;
 
         }
@@ -139,49 +133,120 @@ function mytheme_admin() {
     
 ?>
 <div class="wrap">
-<h2><?php echo $themename; ?> settings</h2>
+<h2><?php echo $themename; ?> Options</h2>
 
 <form method="post">
 
-<table class="optiontable">
+<table class="form-table">
 
 <?php foreach ($options as $value) { 
-    
-if ($value['type'] == "text") { ?>
-        
-<tr valign="top"> 
-    <th scope="row" style="text-align:right"><?php echo $value['name']; ?>:</th>
-    <td>
-        <input style="width:500px" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo get_settings( $value['id'] ); } else { echo $value['std']; } ?>" />
-    </td>
-</tr>
+	
+	switch ( $value['type'] ) {
+		case 'text':
+		?>
+		<tr valign="top" style="<?php echo $value['row_style']; ?>"> 
+		    <th scope="row"><?php echo $value['name']; ?>:</th>
+		    <td>
+		        <input style="<?php echo $value['style']; ?>" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo get_settings( $value['id'] ); } else { echo $value['std']; } ?>" />
+			    <?php echo $value['desc']; ?>
+		    </td>
+		</tr>
+		<?php
+		break;
+		
+		case 'select':
+		?>
+		<tr valign="top"> 
+	        <th scope="row"><?php echo $value['name']; ?>:</th>
+	        <td>
+	            <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
+	                <?php foreach ($value['options'] as $option) { ?>
+	                <option<?php if ( get_settings( $value['id'] ) == $option) { echo ' selected="selected"'; } elseif ($option == $value['std']) { echo ' selected="selected"'; } ?>><?php echo $option; ?></option>
+	                <?php } ?>
+	            </select>
+	        </td>
+	    </tr>
+		<?php
+		break;
+		
+		case 'textarea':
+		$ta_options = $value['options'];
+		?>
+		<tr valign="top"> 
+	        <th scope="row"><?php echo $value['name']; ?>:</th>
+	        <td>
+			    <?php echo $value['desc']; ?>
+				<textarea name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" cols="<?php echo $ta_options['cols']; ?>" rows="<?php echo $ta_options['rows']; ?>"><?php 
+				if( get_settings($value['id']) != "") {
+						echo stripslashes(get_settings($value['id']));
+					}else{
+						echo $value['std'];
+				}?></textarea>
+	        </td>
+	    </tr>
+		<?php
+		break;
 
-<?php } elseif ($value['type'] == "select") { ?>
+		case "radio":
+		?>
+		<tr valign="top"> 
+	        <th scope="row"><?php echo $value['name']; ?>:</th>
+	        <td>
+	            <?php foreach ($value['options'] as $key=>$option) { 
+				$radio_setting = get_settings($value['id']);
+				if($radio_setting != ''){
+		    		if ($key == get_settings($value['id']) ) {
+						$checked = "checked=\"checked\"";
+						} else {
+							$checked = "";
+						}
+				}else{
+					if($key == $value['std']){
+						$checked = "checked=\"checked\"";
+					}else{
+						$checked = "";
+					}
+				}?>
+	            <input type="radio" name="<?php echo $value['id']; ?>" value="<?php echo $key; ?>" <?php echo $checked; ?> /><?php echo $option; ?><br />
+	            <?php } ?>
+	        </td>
+	    </tr>
+		<?php
+		break;
+		
+		case "checkbox":
+		?>
+			<tr valign="top"> 
+		        <th scope="row"><?php echo $value['name']; ?>:</th>
+		        <td>
+		           <?php
+						if(get_settings($value['id'])){
+							$checked = "checked=\"checked\"";
+						}else{
+							$checked = "";
+						}
+					?>
+		            <input type="checkbox" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
+		            <?php  ?>
+			    <?php echo $value['desc']; ?>
+		        </td>
+		    </tr>
+			<?php
+		break;
 
-    <tr valign="top"> 
-        <th scope="row" style="text-align:right"><?php echo $value['name']; ?>:</th>
-        <td>
-            <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
-                <?php foreach ($value['options'] as $option) { ?>
-                <option<?php if ( get_settings( $value['id'] ) == $option) { echo ' selected="selected"'; } elseif ($option == $value['std']) { echo ' selected="selected"'; } ?>><?php echo $option; ?></option>
-                <?php } ?>
-            </select>
-        </td>
-    </tr>
+		default:
 
-<?php 
-} 
+		break;
+	}
 }
 ?>
 
 </table>
-<p><small>* Can be multiple categories.  Uses a comma separated lists of page ID numbers.  e.g. 2,7,12<br />
-	** Your Feedburner ID is used for email subscriptions.<br />
-	*** Defaults to all pages. Uses a comma separated lists of page ID numbers.  e.g. 1,2,5,6</small></p>
+
 
 <p>	<?php
 $cats = get_categories('orderby=ID&hide_empty=0');
-echo 'Category IDs and Names<br />'; 
+echo '<strong>Category IDs and Names</strong><br />'; 
 	foreach($cats as $category) { 
 	    echo $category->cat_ID . ' = ' . $category->cat_name . '<br />'; 
 	} 
@@ -198,7 +263,7 @@ echo 'Page IDs and Names<br />';
 </p>
 
 <h2>Ad Options</h2>
-<table class="optiontable">
+<table class="form-table">
 <p>Location of ads are controlled by widgets.  The 'Ads' widget controls the three ads below. The 'Ad(from ads.php)' widget controls whatever custom code you put into ads.php. They can be turned on or off independent of the widgets on this page.</p>
 
 <?php foreach ($ads_options as $value) { 

@@ -41,67 +41,59 @@
 <body>
 	<div class="header">
 		<div class="container">
+			<div class="logo span-17">
 				<h1><a href="<?php bloginfo('home'); ?>"><?php bloginfo('name'); ?></a></h1>
 					<em><?php bloginfo('description'); ?></em>
-					<?php include (TEMPLATEPATH . '/searchform.php'); ?>
-		</div>
-	</div>
-	
-	<div class="container">
+			</div>
+			<div class="span-7 last">
+				<?php include (TEMPLATEPATH . '/searchform.php'); ?>
+				
+					<p class="rss">
+						<a href="#">Subscription Options</a>
+					</p>
+					<div class="rssoptions">
+						<ul>
+							<?php $rss_url = get_option('cm_feedburner_address'); 
+								if ($rss_url != "") {
+									echo '<li><a href="' . $rss_url . '"> Articles RSS</a></li>';
+								} 
+								else { ?>
+							<li><a href="<?php bloginfo('rss2_url'); ?> ">Articles RSS</a></li>
+							<?php } ?>
+							<?php $comments_url = get_option('cm_feedburner_comments'); 
+								if ($comments_url != "") {
+									echo '<li><a href="' . $comments_url . '"> Comments RSS</a></li>';
+								} 
+								else { ?>
+							<li><a href="<?php bloginfo_rss('comments_rss2_url') ?>">Comments RSS</a></li>
+							<?php } ?>
+						</ul>
 
-		<div class="menu span-17">
-			<ul>
-				<?php 
-				$menupages = get_option('cm_menu_pages');
-				wp_list_pages('title_li=&sort_column=menu_order&include=' . $menupages); ?>
-			</ul>
-		</div>
+						<?php $fbId = get_option('cm_feedburner_id'); //Your feedburner ID ?>
+						<form id="subscribe" method="post" action="http://www.feedburner.com/fb/a/emailverify" target="popupwindow"
+						onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=<?php echo $fbId; ?>', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+							<fieldset>
+								<label for="input_subscribe">By Email</label>
+								<input value="" name="email" id="input_subscribe" type="text" />
+								<input type="hidden" id="submit" name="url" value="http://feeds.feedburner.com/~e?ffid=<?php echo $fbId; ?>"  />
+								<input type="hidden" name="loc" value="en_US"/>
+							</fieldset>
+						</form>	
+					</div>
 
-		<div class="span-7 last">
-			<p class="rss">
-				<a href="#">Subscription Options</a>
-			</p>
-			<div class="rssoptions">
-				<ul>
-					<?php $rss_url = get_option('cm_feedburner_address'); 
-						if ($rss_url != "") {
-							echo '<li><a href="' . $rss_url . '"> Articles RSS</a></li>';
-						} 
-						else { ?>
-					<li><a href="<?php bloginfo('rss2_url'); ?> ">Articles RSS</a></li>
-					<?php } ?>
-					<?php $comments_url = get_option('cm_feedburner_comments'); 
-						if ($comments_url != "") {
-							echo '<li><a href="' . $comments_url . '"> Comments RSS</a></li>';
-						} 
-						else { ?>
-					<li><a href="<?php bloginfo_rss('comments_rss2_url') ?>">Comments RSS</a></li>
-					<?php } ?>
-				</ul>
-			
-				<?php $fbId = get_option('cm_feedburner_id'); //Your feedburner ID ?>
-				<form id="subscribe" method="post" action="http://www.feedburner.com/fb/a/emailverify" target="popupwindow"
-				onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=<?php echo $fbId; ?>', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
-					<fieldset>
-						<label for="input_subscribe">By Email</label>
-						<input value="" name="email" id="input_subscribe" type="text" />
-						<input type="hidden" id="submit" name="url" value="http://feeds.feedburner.com/~e?ffid=<?php echo $fbId; ?>"  />
-						<input type="hidden" name="loc" value="en_US"/>
-					</fieldset>
-				</form>	
 			</div>
 		</div>
-		
 	</div>
 	
-	<?php 
-		$header = get_option('cm_header');  // Gets the option from theme options page
-		if($header == 'No') { }
-		if($header == 'Yes') {
-	 	$image_url = get_option('cm_header_url');
-			if (is_home()) { ?>
-				<div class="big_header container">
-					<img src="<?php echo $image_url; ?>" />
-				</div>
-	<?php } } ?>		
+	<div id="subheader" class="clearfix">
+		
+			<div class="menu">
+				<ul>
+					<?php 
+					$menupages = get_option('cm_menu_pages');
+					wp_list_pages('title_li=&sort_column=menu_order&include=' . $menupages); ?>
+				</ul>
+			</div>
+
+	</div><?php // close subheader ?>	
 	

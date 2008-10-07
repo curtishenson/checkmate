@@ -57,21 +57,16 @@
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
 				
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				
-				<div class="span-3 meta">
+
+				<div class="meta">
 					<ul>
-						<li><?php the_time('M j, Y') ?></li>
-						<li><a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
-						<?php //get thumbnail (custom field)  
-						$post_thumb = get_post_meta($post->ID, 'post_thumb', true); ?>
-						<?php if($post_thumb !== '') { ?>
-						<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><img src="<?php echo $post_thumb; ?>" alt="<?php the_title(); ?>" /></a></li>
-						<?php } else { } ?>
+						<li class="date">Posted On <?php the_time('M j, Y') ?></li>
+						<li class="comment"> | <a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
 					</ul>
 				</div>
 
-				<div class="post span-11 last">
-					<?php the_excerpt(); ?>
+				<div class="post">
+					<?php the_content('Continue Reading'); ?>
 				</div>
 
 				<?php endwhile; else : ?>
@@ -82,8 +77,9 @@
 
 				<?php endif; ?>
 				
-				<div class="posts_navigation">
-					<?php posts_nav_link('-','&laquo; Previous Page','Next Page &raquo;'); ?> 
+				<div class="navigation clearfix">
+					<span class="alignleft"><?php posts_nav_link('','','&laquo; Previous Entries') ?></span>
+					<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
 				</div>
 		</div>
 

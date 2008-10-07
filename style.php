@@ -6,6 +6,10 @@ header("Content-type: text/css");
 
 $color_theme = get_option('cm_color_theme');
 
+// Global CSS Styles
+$header_bg_url = 'images/bg_pattern.gif';
+echo '.header { background-image: url(' . $header_bg_url . ');}';
+
 // Red Color Theme
 if($color_theme == 'Red') { ?>
 
