@@ -1,18 +1,18 @@
 //Search Field
 function searchInput(text){
 	$(document).ready(function(){
-		$("#input_search").val(text).css({"color":"#999"});
+		$("#input_search").val(text).css({"color":"#555"});
 			$("#input_search").one("focus",function(){
 				$(this).val("").css({"color":"#5a5a5a"});
 			});
-		$("div.header form label").hide();
+		$("#searchform label").hide();
 	});
 };
 
 //Subscribe via Email Field
 function emailInput(text){
 	$(document).ready(function(){
-		$("#input_subscribe").val(text).css({"color":"#999"});
+		$("#input_subscribe").val(text).css({"color":"#555"});
 		$("#input_subscribe").one("focus",function(){
 			$(this).val("").css({"color":"#5a5a5a"});
 		});
@@ -27,7 +27,7 @@ $(document).ready(function(){
 	}); 
 
 	//rounded corners on feature
-	$('.feature').corner({
+	$('.classic-feature').corner({
 		tl: { radius: 10 },
 		tr: { radius: 10 },
 		bl: false,
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		
 	//widget highlights
 	var originalBG = $(".widget ul li").css("background-color"); 
-	var fadeColor = "#ddd"; 
+	var fadeColor = "#eee"; 
 	
 	$(".widget ul li").hover( function () { 
 		$(this).animate( { backgroundColor:fadeColor}, 450 ) 

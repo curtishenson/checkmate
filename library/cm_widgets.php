@@ -36,9 +36,12 @@ function cm_widget_welcome_control($number) {
 	$title = attribute_escape($options[$number]['title']);
 	$image = attribute_escape($options[$number]['image']);
 	$text = format_to_edit($options[$number]['text']);
-?>
+?>			
+			<label>Welcome Title</label>
 			<input style="width: 450px;" id="welcome-title-<?php echo $number; ?>" name="welcome-title-<?php echo $number; ?>" type="text" value="<?php echo $title; ?>" />
+			<label>Welcome Image URL<small>(optional)</small></label>
 			<input style="width: 450px;" id="welcome-image-<?php echo $number; ?>" name="welcome-image-<?php echo $number; ?>" type="text" value="<?php echo $image; ?>" />
+			<label>Welcome Text</label>
 			<textarea style="width: 450px; height: 280px;" id="welcome-text-<?php echo $number; ?>" name="welcome-text-<?php echo $number; ?>"><?php echo $text; ?></textarea>
 			<input type="hidden" id="welcome-submit-<?php echo "$number"; ?>" name="welcome-submit-<?php echo "$number"; ?>" value="1" />
 <?php
@@ -65,7 +68,7 @@ function cm_widget_welcome_page() {
 	<div class="wrap">
 		<form method="POST">
 			<h2><?php _e('Welcome Box Widgets'); ?></h2>
-			<p style="line-height: 30px;"><?php _e('How many text welcome boxes would you like?'); ?>
+			<p style="line-height: 30px;"><?php _e('How many welcome boxes would you like?'); ?>
 			<select id="text-number" name="text-number" value="<?php echo $options['number']; ?>">
 <?php for ( $i = 1; $i < 10; ++$i ) echo "<option value='$i' ".($options['number']==$i ? "selected='selected'" : '').">$i</option>"; ?>
 			</select>
@@ -83,7 +86,7 @@ function cm_widget_welcome_register() {
 	$dims = array('width' => 460, 'height' => 350);
 	$class = array('classname' => 'widget_welcome clearfix');
 	for ($i = 1; $i <= 9; $i++) {
-		$name = sprintf(__('Welcome Box %d'), $i);
+		$name = sprintf(__('Checkmate Welcome Box %d'), $i);
 		$id = "welcome-$i"; // Never never never translate an id
 		wp_register_sidebar_widget($id, $name, $i <= $number ? 'cm_widget_welcome' : /* unregister */ '', $class, $i);
 		wp_register_widget_control($id, $name, $i <= $number ? 'cm_widget_welcome_control' : /* unregister */ '', $dims, $i);
@@ -118,7 +121,7 @@ function cm_widget_ads() {
 <?php
 }
 if ( function_exists('register_sidebar_widget') )
-	register_sidebar_widget(__('Ads'), 'cm_widget_ads');
+	register_sidebar_widget(__('Checkmate Ads'), 'cm_widget_ads');
 // END ADS WIDGET
 
 //Ads widget, displays whatever is in ads.php file
@@ -131,7 +134,7 @@ function cm_widget_adinclude() {
 		}
 }
 if ( function_exists('register_sidebar_widget') )
-	register_sidebar_widget(__('Ad(from ad.php)'), 'cm_widget_adinclude');
+	register_sidebar_widget(__('Checkmate Ad<small>(from ad.php)</small>'), 'cm_widget_adinclude');
 // END ADS WIDGET
 
 //tabbed content widget - controls what is in the tabbed box and how many tabbed boxes there are
@@ -182,7 +185,7 @@ function ch_widget_tabcontent_register() {
 	$dims = array('width' => 460, 'height' => 350);
 	$class = array('classname' => 'widget_tabcontent');
 	for ($i = 1; $i <= 9; $i++) {
-		$name = sprintf(__('Tabcontent %d'), $i);
+		$name = sprintf(__('Checkmate Tabcontent %d'), $i);
 		$id = "tabcontent-$i"; // Never never never translate an id
 		wp_register_sidebar_widget($id, $name, $i <= $number ? 'ch_widget_tabcontent' : /* unregister */ '', $class, $i);
 	}

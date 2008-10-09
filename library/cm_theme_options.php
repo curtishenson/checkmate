@@ -2,13 +2,71 @@
 // THEME OPTIONS *************************
 $themename = "Checkmate";
 $shortname = "cm";
+
+
+$logo_path = TEMPLATEPATH . '/images/logo/';
+$logo = array();	
+
+if ( is_dir($logo_path) ) {
+	if ($logo_dir = opendir($logo_path) ) { 
+		while ( ($logo_file = readdir($logo_dir)) !== false ) {
+			if(stristr($logo_file, ".png") !== false) {
+				$logos[] = $logo_file;
+			}
+		}	
+	}
+}
+
+$logos_tmp = asort($logos);
+$logos_tmp = array_unshift($logos, "Select a logo:");
+
+$alt_stylesheet_path = TEMPLATEPATH . '/styles/';
+$alt_stylesheets = array();	
+
+if ( is_dir($alt_stylesheet_path) ) {
+	if ($alt_stylesheet_dir = opendir($alt_stylesheet_path) ) { 
+		while ( ($alt_stylesheet_file = readdir($alt_stylesheet_dir)) !== false ) {
+			if(stristr($alt_stylesheet_file, ".css") !== false) {
+				$alt_stylesheets[] = $alt_stylesheet_file;
+			}
+		}	
+	}
+}	
+
+$alt_stylesheets_tmp = asort($alt_stylesheets);
+$alt_stylesheets_tmp = array_unshift($alt_stylesheets, "Select a stylesheet:");
+
 $options = array (
+	
+	array(	"name" => "Style Options",
+			"type" => "subhead"),
+			
 	//COLOR THEME
-	array(    "name" => "Color Theme",
+	array(  "name" => "Color Theme",
             "id" => $shortname."_color_theme",
             "std" => "Grey",
             "type" => "select",
 			"options" => array("Grey", "Red", "Blue", "Green", "Purple", "Brown", "Grey/Red")),
+			
+	array(	"name" => "Alternate Theme Stylesheet",
+			"desc" => "Place additional theme stylesheets in the <code>styles/</code> subdirectory to have them automatically detected.",
+		    "id" => $shortname."_alt_stylesheet",
+		    "std" => "Select a stylesheet:",
+		    "type" => "select",
+		    "options" => $alt_stylesheets),
+		
+	array(	"name" => "Use Custom Logo",
+			"desc" => "Check this box if you wish to use a logo from the list below.",
+			"id" => $shortname."_use_custom_logo",
+			"std" => "false",
+			"type" => "checkbox"),
+		
+	array(	"name" => "Logo",
+			"desc" => "Upload PNG files to <code>images/logo/</code> to have them automatically detected.",
+		    "id" => $shortname."_logo",
+		    "std" => "Select a logo:",
+		    "type" => "select",
+		    "options" => $logos),
 
 	//FEATURE STORY			
     array(   "name" => "Display Feature Story",
@@ -16,12 +74,29 @@ $options = array (
             "std" => "Yes",
             "type" => "select",
 			"options" => array("Yes", "No")),
-		array(	"name" => "Feature Category ID",
-				"desc" => "Can be multiple categories. Uses a comma separated lists of page ID numbers. e.g. 2,7,12",
-				"id" => $shortname."_featureId",
-				"std" => 1,
-				"type" => "text"),
-	//FEEDBURNER			
+	array(	"name" => "Feature Category ID",
+			"desc" => "Can be multiple categories. Uses a comma separated lists of page ID numbers. e.g. 2,7,12",
+			"id" => $shortname."_featureId",
+			"std" => 1,
+			"type" => "text"),
+			
+	//MENU				
+	array ( "name" => "Pages to display in menu",
+			"desc" => "Defaults to all pages. Uses a comma separated lists of page ID numbers. e.g. 1,2,5,6",
+			"id" => $shortname."_menu_pages",
+			"std" => "",
+			"type" => "text"),
+	//FOOTER WIDGETS		
+	array ( "name" => "Widgetize Footer",
+			"id" => $shortname."_footer_widgets",
+			"std" => "",
+			"type" => "select",
+			"options" => array("Enabled", "Disabled")),
+			
+	//FEEDBURNER	
+	array(	"name" => "Feedburner Options",
+			"type" => "subhead"),
+					
 	array ( "name" => "Feedburner Feed Address",
 			"id" => $shortname."_feedburner_address",
 			"std" => "",
@@ -41,53 +116,55 @@ $options = array (
 			"type" => "text",
 			"style" => "width: 200px;",
 			"row_style" => "background-color: #ffd7ad;"),
-	//MENU				
-	array ( "name" => "Pages to display in menu",
-			"desc" => "Defaults to all pages. Uses a comma separated lists of page ID numbers. e.g. 1,2,5,6",
-			"id" => $shortname."_menu_pages",
-			"std" => "",
-			"type" => "text"),
-	//FOOTER WIDGETS		
-	array ( "name" => "Widgetize Footer",
-			"id" => $shortname."_footer_widgets",
-			"std" => "",
-			"type" => "select",
-			"options" => array("Enabled", "Disabled"))
-			
-);
 
 //AD OPTIONS ********
-$ads_options = array (
+
+	array(	"name" => "Ad Options",
+			"type" => "subhead"),
+
 	array(	"name" => "Show Ads",
 			"id" => $shortname."_show_ads",
 			"std" => "",
 			"type" => "select",
+			"desc" => "Turn all ads below on or off.",
 			"options" => array("Yes", "No")),
 			
 	array(   "name" => "Ad One Image URL",
             "id" => $shortname."_ad_image_one",
             "std" => "",
+			"style" => "width: 500px",
+			"desc" => "Address to Ad Image.",
             "type" => "text"),
     array(   "name" => "Ad One URL",
             "id" => $shortname."_ad_url_one",
+			"style" => "width: 500px",
+			"desc" => "Ad link",
             "type" => "text",
             "std" => ""),
 
 	array(   "name" => "Ad Two Image URL",
             "id" => $shortname."_ad_image_two",
+			"style" => "width: 500px",
+			"desc" => "Address to Ad Image.",
             "std" => "",
             "type" => "text"),
     array(   "name" => "Ad Two URL",
             "id" => $shortname."_ad_url_two",
+			"style" => "width: 500px",
+			"desc" => "Ad link",
             "type" => "text",
             "std" => ""),
 
 	array(   "name" => "Ad Three Image URL",
             "id" => $shortname."_ad_image_three",
+			"style" => "width: 500px",
+			"desc" => "Address to Ad Image.",
             "std" => "",
             "type" => "text"),
     array(   "name" => "Ad Three URL",
             "id" => $shortname."_ad_url_three",
+			"style" => "width: 500px",
+			"desc" => "Ad link",
             "type" => "text",
             "std" => "")
 );
@@ -126,7 +203,7 @@ function mytheme_add_admin() {
 
 function mytheme_admin() {
 
-    global $themename, $shortname, $options, $ads_options;
+    global $themename, $shortname, $options;
 
     if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' settings saved.</strong></p></div>';
     if ( $_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' settings reset.</strong></p></div>';
@@ -142,6 +219,16 @@ function mytheme_admin() {
 <?php foreach ($options as $value) { 
 	
 	switch ( $value['type'] ) {
+		case 'subhead':
+		?>
+			</table>
+			
+			<h3><?php echo $value['name']; ?></h3>
+			
+			<table class="form-table">
+		<?php
+		break;
+
 		case 'text':
 		?>
 		<tr valign="top" style="<?php echo $value['row_style']; ?>"> 
@@ -227,7 +314,7 @@ function mytheme_admin() {
 						}
 					?>
 		            <input type="checkbox" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
-		            <?php  ?>
+
 			    <?php echo $value['desc']; ?>
 		        </td>
 		    </tr>
@@ -261,44 +348,6 @@ echo 'Page IDs and Names<br />';
 	} 
 	?>
 </p>
-
-<h2>Ad Options</h2>
-<table class="form-table">
-<p>Location of ads are controlled by widgets.  The 'Ads' widget controls the three ads below. The 'Ad(from ads.php)' widget controls whatever custom code you put into ads.php. They can be turned on or off independent of the widgets on this page.</p>
-
-<?php foreach ($ads_options as $value) { 
-    
-if ($value['type'] == "text") { ?>
-        
-<tr valign="top"> 
-    <th scope="row" style="text-align:right"><?php echo $value['name']; ?>:</th>
-    <td>
-        <input style="width:700px" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo get_settings( $value['id'] ); } else { echo $value['std']; } ?>" />
-    </td>
-</tr>
-
-<?php } elseif ($value['type'] == "select") { ?>
-
-    <tr valign="top"> 
-        <th scope="row" style="text-align:right"><?php echo $value['name']; ?>:</th>
-        <td>
-            <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
-                <?php foreach ($value['options'] as $option) { ?>
-                <option<?php if ( get_settings( $value['id'] ) == $option) { echo ' selected="selected"'; } elseif ($option == $value['std']) { echo ' selected="selected"'; } ?>><?php echo $option; ?></option>
-                <?php } ?>
-            </select>
-        </td>
-    </tr>
-
-<?php 
-} 
-}
-?>
-
-</table>
-
-
-
 
 <p class="submit">
 <input name="save" type="submit" value="Save changes" />    

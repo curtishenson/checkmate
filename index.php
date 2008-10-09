@@ -6,14 +6,17 @@
 		$feature = get_option('cm_feature');  // Gets the option from theme options page
 			if($feature == 'No') { }
 			if(($feature == 'Yes') && !(is_paged()) ) { 
-				
-			cm_feature_post();
+				cm_feature_post();
+				//cm_classic_feature_post();
 		  	} 
 		?>
 		
 		<div class="blog">
 			
-			<?php			
+			<?php 
+			
+			query_posts($query_string . "&order=DESC");
+				
 			if(have_posts()):
 			while(have_posts()) : the_post();
 			if( $post->ID == $feature_post ) continue; update_post_caches($posts);

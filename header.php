@@ -1,3 +1,12 @@
+<?php
+global $options;
+foreach ($options as $value) {
+    if (get_settings( $value['id'] ) === FALSE) { $$value['id'] = $value['std']; }
+    else { $$value['id'] = get_settings( $value['id'] ); }
+    }
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -42,8 +51,14 @@
 	<div class="header">
 		<div class="container">
 			<div class="logo span-17">
-				<h1><a href="<?php bloginfo('home'); ?>"><?php bloginfo('name'); ?></a></h1>
-					<em><?php bloginfo('description'); ?></em>
+				<?php 	if ( $cm_use_custom_logo == 'true' ) { 
+							echo "<a href=\"" . get_bloginfo('home') . "\">";
+							 	echo "<img src=\"" . get_template_directory_uri() . "/images/logo/" . $cm_logo ."\" alt=\"" . get_bloginfo('name') . "\" />";
+							echo "</a>";
+						} else { ?>
+							<h1><a href="<?php bloginfo('home'); ?>"><?php bloginfo('name'); ?></a></h1>
+							<em><?php bloginfo('description'); ?></em>
+				<?php }	 ?>
 			</div>
 			<div class="span-7 last">
 				<?php include (TEMPLATEPATH . '/searchform.php'); ?>
