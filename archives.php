@@ -10,6 +10,7 @@ Template Name: Archives
 <div class="container archives">
 	
 	<h2>You are viewing the Archives</h2>
+	<?php cm_left_column() ?>
 		<div class="span-14 content">
 			<div class="">
 				<h3>View By Month</h3>
@@ -38,9 +39,7 @@ Template Name: Archives
 			</div>
 		</div>		
 		
-	<div class="sidebar span-10 last">
-		<?php get_sidebar(); ?>
-	</div>
+		<?php cm_sidebar(); ?>
 	
 </div><?php //closes container ?>
 

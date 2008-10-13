@@ -1,13 +1,19 @@
 <?php get_header(); ?>
 <div class="container content">
+	
+	<?php cm_left_column() ?>
 		
 	<div class="span-14">
 		<?php	
 		$feature = get_option('cm_feature');  // Gets the option from theme options page
 			if($feature == 'No') { }
 			if(($feature == 'Yes') && !(is_paged()) ) { 
-				cm_feature_post();
-				//cm_classic_feature_post();
+				$classic = get_option('cm_use_classic');
+				if ($classic == 'true') {
+					cm_classic_feature_post();
+				} else { 
+					cm_feature_post();
+				}
 		  	} 
 		?>
 		
@@ -42,7 +48,6 @@
 				<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
 			</div>
 			
-			
 			<?php  else : ?>
 				
 				<h2>Not Found</h2>
@@ -51,23 +56,11 @@
 				
 			<?php endif;?>
 
-		</div><!-- closes blog -->
+		</div>
 		
-	</div><!-- close left side -->
-	
-	<?php
-		$feature = get_option('cm_feature');  // Gets the option from theme options page
-			if($feature == 'Yes') { ?>
-				<div class="sidebar_feature">
-					<?php get_sidebar(); ?>
-				</div>
-	<?php	 }
-			else {
-	?>
-	<div class="sidebar">
-		<?php get_sidebar(); ?>
 	</div>
-	<?php } ?>
+	
+	<?php cm_sidebar(); ?>
 	
 </div>
 

@@ -14,7 +14,7 @@ Template Name: Page No Sidebar
 				
 				<h2><?php the_title(); ?></h2>
 
-				<div class="post span-24 last">
+				<div class="post">
 					<?php the_content(); ?>
 					<?php wp_link_pages('before=<div class="page-links"> Pages: &after=</div>'); ?>
 				</div>

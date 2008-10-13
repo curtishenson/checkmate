@@ -1,6 +1,10 @@
 <?php get_header(); ?>
 
 <div class="container archive">
+	
+	<?php cm_left_column() ?>
+	
+	<div class="span-14">
 		<h2>404 Error! Sorry but we couldn't find what you are looking for.  Please try the search form or the archives.</h2>
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
 		  	<option value=""><?php echo attribute_escape(__('View By Month')); ?></option> 
@@ -18,10 +22,9 @@
 				?>
 				<noscript><input type="submit" value="View" /></noscript>
 				</form>
-		
-	<div class="sidebar">
-		<?php get_sidebar(); ?>
 	</div>
+		
+	<?php cm_sidebar(); ?>
 	
 </div><?php //closes container ?>
 

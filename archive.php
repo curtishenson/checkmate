@@ -52,6 +52,8 @@
 			</form>
 		</div>
 		
+		<?php cm_left_column() ?>
+		
 		<div class="blog span-14">
 			
 			<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
@@ -82,11 +84,8 @@
 					<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
 				</div>
 		</div>
-
 		
-	<div class="sidebar span-10 last">
-		<?php get_sidebar(); ?>
-	</div>
+	<?php cm_sidebar(); ?>
 	
 </div><?php //closes container ?>
 

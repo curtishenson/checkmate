@@ -41,6 +41,13 @@ $options = array (
 	array(	"name" => "Style Options",
 			"type" => "subhead"),
 			
+	array(  "name" => "Layout",
+	        "id" => $shortname."_layout",
+			"desc" => "Choose between the more traditional 2 column layout, or a 3 column layout with content centered.",
+	        "std" => "2 Column",
+	        "type" => "select",
+			"options" => array("2 Column", "3 Column")),
+			
 	//COLOR THEME
 	array(  "name" => "Color Theme",
             "id" => $shortname."_color_theme",
@@ -67,6 +74,12 @@ $options = array (
 		    "std" => "Select a logo:",
 		    "type" => "select",
 		    "options" => $logos),
+		
+	array(	"name" => "Use Classic Look",
+			"desc" => "Check this box if you wish to use the rounded corner feature story and welcome widget from Checkmate 1.0.",
+			"id" => $shortname."_use_classic",
+			"std" => "false",
+			"type" => "checkbox"),
 
 	//FEATURE STORY			
     array(   "name" => "Display Feature Story",
@@ -93,6 +106,9 @@ $options = array (
 			"type" => "select",
 			"options" => array("Enabled", "Disabled")),
 			
+  	array(	"name" => "Category and Page Ids",
+  			"type" => "cats_ids"),
+			
 	//FEEDBURNER	
 	array(	"name" => "Feedburner Options",
 			"type" => "subhead"),
@@ -116,6 +132,25 @@ $options = array (
 			"type" => "text",
 			"style" => "width: 200px;",
 			"row_style" => "background-color: #ffd7ad;"),
+			
+   	array(	"name" => "Header and Footer Code",
+   			"type" => "subhead"),
+
+  	array ( "name" => "Header Code",
+  			"desc" => "If you have code you want to inject into the head of your website, put it here.",
+  			"id" => $shortname."_header_code",
+  			"std" => "",
+  			"type" => "textarea",
+  			"options" => array(	"rows" => "10",
+								"cols" => "95")),
+
+ 	 array ( "name" => "Footer Code",
+ 	 		"desc" => "If you have code you want to inject into the footer, put it here.",
+ 	 		"id" => $shortname."_footer_code",
+ 	 		"std" => "",
+ 	 		"type" => "textarea",
+ 	 		"options" => array(	"rows" => "10",
+								"cols" => "95")),
 
 //AD OPTIONS ********
 
@@ -251,6 +286,7 @@ function mytheme_admin() {
 	                <option<?php if ( get_settings( $value['id'] ) == $option) { echo ' selected="selected"'; } elseif ($option == $value['std']) { echo ' selected="selected"'; } ?>><?php echo $option; ?></option>
 	                <?php } ?>
 	            </select>
+				<?php echo $value['desc']; ?>
 	        </td>
 	    </tr>
 		<?php
@@ -320,6 +356,33 @@ function mytheme_admin() {
 		    </tr>
 			<?php
 		break;
+		
+		case "cats_ids":
+		?>
+			<tr valign="top"> 
+		        <th scope="row"><?php echo $value['name']; ?>:</th>
+		        <td>
+				<p style="float:left; width:40%;">	<?php
+				$cats = get_categories('orderby=ID&hide_empty=0');
+				echo '<strong>Category IDs and Names</strong><br />'; 
+					foreach($cats as $category) { 
+					    echo $category->cat_ID . ' = ' . $category->cat_name . '<br />'; 
+					} 
+					?>
+				</p>
+				<p style="float:left; width:40%">	<?php
+				$pages = get_pages('orderby=ID&hide_empty=0');
+				//print_r($pages);
+				echo '<strong>Page IDs and Names</strong><br />'; 
+					foreach($pages as $page) { 
+					    echo $page->ID . ' = ' . $page->post_name . '<br />'; 
+					} 
+					?>
+				</p>
+		        </td>
+		    </tr>
+			<?php
+		break;
 
 		default:
 
@@ -329,25 +392,6 @@ function mytheme_admin() {
 ?>
 
 </table>
-
-
-<p>	<?php
-$cats = get_categories('orderby=ID&hide_empty=0');
-echo '<strong>Category IDs and Names</strong><br />'; 
-	foreach($cats as $category) { 
-	    echo $category->cat_ID . ' = ' . $category->cat_name . '<br />'; 
-	} 
-	?>
-</p>
-<p>	<?php
-$pages = get_pages('orderby=ID&hide_empty=0');
-//print_r($pages);
-echo 'Page IDs and Names<br />'; 
-	foreach($pages as $page) { 
-	    echo $page->ID . ' = ' . $page->post_name . '<br />'; 
-	} 
-	?>
-</p>
 
 <p class="submit">
 <input name="save" type="submit" value="Save changes" />    

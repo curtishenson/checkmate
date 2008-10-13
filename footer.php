@@ -39,6 +39,10 @@
 	emailInput("Enter your email and hit enter");
 </script>
 
+<?php 	$footer_code = get_option('cm_footer_code'); 
+		echo stripslashes($footer_code); 
+?>
+
 <?php wp_footer(); ?>
 
 </body>

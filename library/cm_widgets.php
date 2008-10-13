@@ -7,15 +7,27 @@ function cm_widget_welcome($args, $number = 1) {
 	$title = $options[$number]['title'];
 	$image = $options[$number]['image'];
 	$text = apply_filters( 'widget_welcome', $options[$number]['text'] );
-?>
-		<?php if (is_home()) {?>
-		<?php echo $before_widget; ?>
-			<?php if ( !empty( $title ) ) { echo "<h2>" . $title . "</h2>"; } ?>
-			<p><?php if ( !empty( $image ) ) { echo '<img src="' . $image . '" //>'; } ?>
-			<?php echo $text; ?></p>
-		<?php echo $after_widget; ?>
-		<?php } ?>
-<?php
+	
+	$classic = get_option('cm_use_classic');
+	if ($classic == 'true') {
+	 	if (is_home()) {
+			echo '<div class="widget widget_welcome_classic clearfix">';
+				if ( !empty( $title ) ) { echo "<h2>" . $title . "</h2>"; } ?>
+			<p><?php if ( !empty( $image ) ) { echo '<img src="' . $image . '" //>'; } 
+				echo $text; ?></p>
+			<?php echo $after_widget; 
+	 	} 
+	} else {
+		if (is_home()) {
+			echo $before_widget;
+				if ( !empty( $title ) ) { echo "<h2>" . $title . "</h2>"; } ?>
+				<?php if ( !empty( $image ) ) { echo '<img src="' . $image . '" //>'; } ?>
+			<p>
+				<?php echo $text; ?></p>
+			<?php echo $after_widget; 
+	 	}
+	}
+		
 }
 
 function cm_widget_welcome_control($number) {

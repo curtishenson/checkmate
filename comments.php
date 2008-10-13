@@ -33,7 +33,7 @@
     /* This is a loop for printing comments */
     if ($numComments != 0) : ?>
 
-    <h2 class="comments-header"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></h2>
+    <h3 class="comments-header"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></h3>
 	<p class="smallrss"><?php comments_rss_link('Subscribe to the Comments'); ?></p>
     <ol id="comments">
 

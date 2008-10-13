@@ -35,7 +35,7 @@ $(document).ready(function(){
 		antiAlias: true,
 		autoPad: true,
 		validTags: ["div"] });
-	$('.widget_welcome').corner({
+	$('.widget_welcome_classic').corner({
 		tr: { radius: 10 },
 		tl: { radius: 10 },
 		br: false,

@@ -7,6 +7,8 @@ Template Name: Page With Comments
 <?php get_header(); ?>
 	
 <div class="container single">
+	
+	<?php cm_left_column() ?>
 		
 		<div class="page span-14">
 			
@@ -14,7 +16,7 @@ Template Name: Page With Comments
 				
 				<h2><?php the_title(); ?></h2>
 
-				<div class="post span-14 last">
+				<div class="post">
 					<?php the_content(); ?>
 					<?php wp_link_pages('before=<div class="page-links"> Pages: &after=</div>'); ?>
 				</div>
@@ -31,11 +33,8 @@ Template Name: Page With Comments
 
 				<?php endif; ?>
 		</div>
-
 		
-	<div class="sidebar span-10 last">
-		<?php get_sidebar(); ?>
-	</div>
+	<?php cm_sidebar(); ?>
 	
 </div><?php //closes container ?>
 

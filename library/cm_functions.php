@@ -7,6 +7,50 @@ function get_the_author_posts_link($idmode='') {
     return '<a href="' . get_author_link(0, $authordata->ID, $authordata->user_nicename) . '" title="' . sprintf(__("Posts by %s"), htmlspecialchars(the_author($idmode, false))) . '">' . the_author($idmode, false) . '</a>';
 }
 
+// Left Column for 3 Column Layout
+function cm_left_column() {
+	$layout = get_option('cm_layout');
+	$feature = get_option('cm_feature');
+
+	if ( $layout == '3 Column' ){
+		if (($feature == 'Yes') && is_home()) { $class = 'sidebar_feature'; } else { $class = 'sidebar'; };
+		echo '<div class="' . $class . ' span-5">';
+		 	if ( !function_exists('dynamic_sidebar')
+			        || !dynamic_sidebar('Sidebar Left') ) : 
+			endif;
+		echo '</div>';
+	}
+}
+
+// Right Column
+function cm_sidebar() {
+	$layout = get_option('cm_layout');
+	$feature = get_option('cm_feature');
+
+	if ( $layout == '2 Column' ){
+		$feature = get_option('cm_feature'); 
+		if ( !(is_home()) ) { echo '<div class="span-10 last">'; }
+		echo '<div class=';
+			if (($feature == 'Yes') && is_home()) { 
+				echo '"sidebar_feature">';
+			} else {
+				echo '"sidebar">';
+			}
+		
+			get_sidebar();
+		echo '</div>';	
+		if ( !(is_home()) ) { echo '</div>'; }		
+	} 
+	elseif ( $layout == '3 Column') {
+		if (($feature == 'Yes') && is_home()) { $class = 'sidebar_feature'; } else { $class = 'sidebar'; };
+		echo '<div class="' . $class . ' span-5 last">';
+			if ( !function_exists('dynamic_sidebar')
+			        || !dynamic_sidebar('Sidebar Right') ) : 
+			endif;
+		echo '</div>';
+	}
+}
+
 // CLASSIC FEATURE CATEGORIES
  
 function cm_feature_post(){
