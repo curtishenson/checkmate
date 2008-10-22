@@ -4,8 +4,9 @@ $themename = "Checkmate";
 $shortname = "cm";
 
 
+//Logo Auto Detect
 $logo_path = TEMPLATEPATH . '/images/logo/';
-$logo = array();	
+$logos = array();	
 
 if ( is_dir($logo_path) ) {
 	if ($logo_dir = opendir($logo_path) ) { 
@@ -20,6 +21,24 @@ if ( is_dir($logo_path) ) {
 $logos_tmp = asort($logos);
 $logos_tmp = array_unshift($logos, "Select a logo:");
 
+
+// Background Image Detect
+$bg_path = TEMPLATEPATH . '/images/bg_images/';
+$bgs = array();	
+
+if ( is_dir($bg_path) ) {
+	if ($bg_dir = opendir($bg_path) ) { 
+		while ( ($bg_file = readdir($bg_dir)) !== false ) {
+			$bgs[] = $bg_file;
+		}	
+	}
+}
+
+$bgs_tmp = asort($bgs);
+$bgs_tmp = array_unshift($bgs, "Select a background:");
+
+
+// Stylesheet Auto Detect
 $alt_stylesheet_path = TEMPLATEPATH . '/styles/';
 $alt_stylesheets = array();	
 
@@ -49,11 +68,6 @@ $options = array (
 			"options" => array("2 Column", "3 Column")),
 			
 	//COLOR THEME
-	array(  "name" => "Color Theme",
-            "id" => $shortname."_color_theme",
-            "std" => "Grey",
-            "type" => "select",
-			"options" => array("Grey", "Red", "Blue", "Green", "Purple", "Brown", "Grey/Red")),
 			
 	array(	"name" => "Alternate Theme Stylesheet",
 			"desc" => "Place additional theme stylesheets in the <code>styles/</code> subdirectory to have them automatically detected.",
@@ -75,6 +89,20 @@ $options = array (
 		    "type" => "select",
 		    "options" => $logos),
 		
+ 	array(	"name" => "Header Background Image",
+ 			"desc" => "Upload image files to <code>images/bg_images/</code> to have them automatically detected.",
+ 		    "id" => $shortname."_bg_url",
+ 		    "std" => "Select a background:",
+ 		    "type" => "select",
+ 		    "options" => $bgs),
+
+	array(	"name" => "Header Background Position",
+			"desc" => "Select centered or repeated background.",
+		    "id" => $shortname."_bg_position",
+		    "std" => "Repeated:",
+		    "type" => "select",
+		    "options" => array("Centered", "Repeated") ),
+		
 	array(	"name" => "Use Classic Look",
 			"desc" => "Check this box if you wish to use the rounded corner feature story and welcome widget from Checkmate 1.0.",
 			"id" => $shortname."_use_classic",
@@ -87,6 +115,7 @@ $options = array (
             "std" => "Yes",
             "type" => "select",
 			"options" => array("Yes", "No")),
+			
 	array(	"name" => "Feature Category ID",
 			"desc" => "Can be multiple categories. Uses a comma separated lists of page ID numbers. e.g. 2,7,12",
 			"id" => $shortname."_featureId",
@@ -132,8 +161,9 @@ $options = array (
 			"type" => "text",
 			"style" => "width: 200px;",
 			"row_style" => "background-color: #ffd7ad;"),
-			
-   	array(	"name" => "Header and Footer Code",
+	
+	//CODE INSERTS		
+   	array(	"name" => "Insert Your Own Code Code",
    			"type" => "subhead"),
 
   	array ( "name" => "Header Code",
@@ -150,6 +180,14 @@ $options = array (
  	 		"std" => "",
  	 		"type" => "textarea",
  	 		"options" => array(	"rows" => "10",
+								"cols" => "95")),
+								
+	array ( "name" => "After Post Code",
+			"desc" => "If you have code you want to inject after posts on single post pages, put it here.",
+			"id" => $shortname."_afterpost_code",
+			"std" => "",
+			"type" => "textarea",
+			"options" => array(	"rows" => "10",
 								"cols" => "95")),
 
 //AD OPTIONS ********

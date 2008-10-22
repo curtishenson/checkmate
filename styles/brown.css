@@ -1,0 +1,38 @@
+h1, h2, h3, h4, h5, h6 {font-weight:normal; color:#362D28; font-family: Georgia, serif;}
+
+a { color: #362D28; }
+a:hover { color: #777;}
+a:visited { color:#777;}
+
+.widget h3, .navigation, .comments-header, .archives .content h3, .page-links { border-top: 2px solid #AD8368; background-color: #f7f1ec; border-bottom: 1px solid #C9AD99; color: #AD8368; }
+
+body { background-color: #f9f9f9; }
+
+/******  HEADER *****/
+.header { background-color: #362D28; color:#bbb;}
+
+/****** MENU *******/
+#subheader, .sf-js-enabled li li { background-color: #f7f1ec; }
+.menu ul li a:hover { color: #FB9D3A; }
+.menu ul li.current_page_item a, .menu ul li.current_page_item sub{ color: #FB9D3A; }
+
+.sf-js-enabled li:hover, .sf-js-enabled li.sfHover, .sf-js-enabled a:focus, .sf-js-enabled a:hover, .sf-js-enabled a:active { background:#362D28; }
+
+/**** FEATURED ****/
+.feature {background-color: #362D28; color: #ddd; }
+.feature h2 a, .feature a{ color: #fff; }
+.feature .meta ul li, .feature .meta ul li a, .classic-feature .meta ul li a { color: #fff; }
+.feature .more-link, .feature .more-link:hover { color: #FFF; }
+
+/**** BLOG ****/
+.blog h2 a { color: #362D28;}
+
+/**** WIDGETS ****/
+.cm_rss_widget { background-color: #f7f1ec; }
+.cm_rss_widget h3 { border-top: none; padding: 0; background: none; color: #FB9D3A; margin-bottom: .4em; }
+/* Welcome Box Widget */
+.widget_welcome { background-color: #E7DDD4; }
+
+/**** COMMENTS ****/
+#comments li.odd { background-color: #f5f5f5;}
+#comments li.even { background-color: #E8E1DD; }

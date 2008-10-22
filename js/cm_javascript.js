@@ -12,8 +12,9 @@ function searchInput(text){
 //Subscribe via Email Field
 function emailInput(text){
 	$(document).ready(function(){
-		$("#input_subscribe").val(text).css({"color":"#555"});
-		$("#input_subscribe").one("focus",function(){
+		$("#input_subscribe, .cm_rss_widget #input_subscribe").val(text).css({"color":"#555"});
+		$(".cm_rss_widget label").hide()
+		$("#input_subscribe, .cm_rss_widget #input_subscribe").one("focus",function(){
 			$(this).val("").css({"color":"#5a5a5a"});
 		});
 	});
@@ -45,15 +46,16 @@ $(document).ready(function(){
 		validTags: ["div"] });
 		
 	//widget highlights
-	var originalBG = $(".widget ul li").css("background-color"); 
-	var fadeColor = "#eee"; 
+	//requires jquery.color.js to be loaded
+	//var originalBG = $(".widget ul li").css("background-color"); 
+	//var fadeColor = "#eee"; 
 	
-	$(".widget ul li").hover( function () { 
-		$(this).animate( { backgroundColor:fadeColor}, 450 ) 
-		.animate( {backgroundColor:"#fff"}, 950 )
-	},
-	function () {}
-	);
+	//$(".widget ul li").hover( function () { 
+	//	$(this).animate( { backgroundColor:fadeColor}, 450 ) 
+	//	.animate( {backgroundColor:"#fff"}, 950 )
+	//},
+	//function () {}
+	//);
 	
 	//Hide RSS Options
 	$(".rssoptions").hide();

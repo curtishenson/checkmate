@@ -1,5 +1,155 @@
 <?php
 
+//RSS WIDGET
+function cm_rss_widget($args, $widget_args = 1) {
+	extract( $args, EXTR_SKIP );
+	if ( is_numeric($widget_args) )
+		$widget_args = array( 'number' => $widget_args );
+	$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
+	extract( $widget_args, EXTR_SKIP );
+	
+	$options = get_option('cm_rss_widget');
+	if ( !isset($options[$number]) )
+		return;
+	
+	$title = $options[$number]['title'];
+	$image = $options[$number]['image'];
+	$text = apply_filters( 'cm_rss_widget', $options[$number]['text'] );
+	
+		echo $before_widget;
+		if ( !empty( $title ) ) { echo "<h3>" . $title . "</h3>"; }
+		 if ( !empty( $image ) ) { echo '<img src="' . $image . '" alt="RSS" />'; }
+			if ( !empty($text) ) { ?>
+				<p><?php echo $text; ?></p> <?php } ?>
+					<ul>
+						<?php $rss_url = get_option('cm_feedburner_address'); 
+							if ($rss_url != "") {
+								echo '<li><a href="' . $rss_url . '"> Articles RSS</a></li>';
+							} 
+							else { ?>
+						<li><a href="<?php bloginfo('rss2_url'); ?> ">Articles RSS</a></li>
+						<?php } ?>
+						<?php $comments_url = get_option('cm_feedburner_comments'); 
+							if ($comments_url != "") {
+								echo '<li><a href="' . $comments_url . '"> Comments RSS</a></li>';
+							} 
+							else { ?>
+						<li><a href="<?php bloginfo_rss('comments_rss2_url') ?>">Comments RSS</a></li>
+						<?php } ?>
+					</ul>
+
+					<?php $fbId = get_option('cm_feedburner_id'); //Your feedburner ID 
+					if ( !empty($fbId) ) {?>
+						<form method="post" action="http://www.feedburner.com/fb/a/emailverify" target="popupwindow"
+						onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=<?php echo $fbId; ?>', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+							<fieldset>
+								<label for="input_subscribe">By Email</label>
+								<input value="" name="email" id="input_subscribe" type="text" />
+								<input type="hidden" id="submit" name="url" value="http://feeds.feedburner.com/~e?ffid=<?php echo $fbId; ?>"  />
+								<input type="hidden" name="loc" value="en_US"/>
+							</fieldset>
+						</form>	
+					<?php } ?>
+			
+		<?php echo $after_widget; 
+		
+}
+
+function cm_rss_widget_control($widget_args) {
+	global $wp_registered_widgets;
+	static $updated = false;
+
+	if ( is_numeric($widget_args) )
+		$widget_args = array( 'number' => $widget_args );
+	$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
+	extract( $widget_args, EXTR_SKIP );
+
+	$options = get_option('cm_rss_widget');
+	if ( !is_array($options) )
+		$options = array();
+		
+	if ( !$updated && !empty($_POST['sidebar']) ) {
+		$sidebar = (string) $_POST['sidebar'];
+
+		$sidebars_widgets = wp_get_sidebars_widgets();
+		if ( isset($sidebars_widgets[$sidebar]) )
+			$this_sidebar =& $sidebars_widgets[$sidebar];
+		else
+			$this_sidebar = array();
+
+		foreach ( $this_sidebar as $_widget_id ) {
+			if ( 'cm_rss_widget' == $wp_registered_widgets[$_widget_id]['callback'] && isset($wp_registered_widgets[$_widget_id]['params'][0]['number']) ) {
+				$widget_number = $wp_registered_widgets[$_widget_id]['params'][0]['number'];
+				if ( !in_array( "cm_rss_widget-$widget_number", $_POST['widget-id'] ) ) // the widget has been removed.
+					unset($options[$widget_number]);
+			}
+		}
+
+		foreach ( (array) $_POST['cm_rss_widget'] as $widget_number => $cm_rss_widget ) {
+			if ( !isset($cm_rss_widget['text']) && isset($options[$widget_number]) ) // user clicked cancel
+				continue;
+			$title = strip_tags(stripslashes($cm_rss_widget['title']));
+			$image = strip_tags(stripslashes($cm_rss_widget['image']));
+			if ( current_user_can('unfiltered_html') )
+				$text = stripslashes( $cm_rss_widget['text'] );
+			else
+				$text = stripslashes(wp_filter_post_kses( $cm_rss_widget['text'] ));
+			$options[$widget_number] = compact( 'title', 'text', 'image' );
+		}
+
+		update_option('cm_rss_widget', $options);
+		$updated = true;
+	}
+
+	if ( -1 == $number ) {
+		$title = '';
+		$text = '';
+		$image = '';
+		$number = '%i%';
+	} else {
+		$title = attribute_escape($options[$number]['title']);
+		$image = attribute_escape($options[$number]['image']);
+		$text = format_to_edit($options[$number]['text']);
+	}
+?>
+		<p>
+			<label>RSS Title</label>
+			<input class="widefat" id="cm_rss_widget-title-<?php echo $number; ?>" name="cm_rss_widget[<?php echo $number; ?>][title]" type="text" value="<?php echo $title; ?>" />
+			<br /><label>RSS Icon URL</label>
+			<input class="widefat" id="cm_rss_widget-image-<?php echo $number; ?>" name="cm_rss_widget[<?php echo $number; ?>][image]" type="text" value="<?php echo $image; ?>" />
+			<label>Optional Text</label>
+			<textarea class="widefat" rows="16" cols="20" id="cm_rss_widget-text-<?php echo $number; ?>" name="cm_rss_widget[<?php echo $number; ?>][text]"><?php echo $text; ?></textarea>
+			<input type="hidden" name="cm_rss_widget[<?php echo $number; ?>][submit]" value="1" />
+		</p>
+<?php
+}
+
+function cm_rss_widget_register() {
+	if ( !$options = get_option('cm_rss_widget') )
+		$options = array();
+	$widget_ops = array('classname' => 'cm_rss_widget', 'description' => __('Checkmate\'s RSS Widget'));
+	$control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'cm_rss_widget');
+	$name = __('Checkmate RSS Widget');
+
+	$id = false;
+	foreach ( array_keys($options) as $o ) {
+		// Old widgets can have null values for some reason
+		if ( !isset($options[$o]['title']) || !isset($options[$o]['text']) )
+			continue;
+		$id = "cm_rss_widget-$o"; // Never never never translate an id
+		wp_register_sidebar_widget($id, $name, 'cm_rss_widget', $widget_ops, array( 'number' => $o ));
+		wp_register_widget_control($id, $name, 'cm_rss_widget_control', $control_ops, array( 'number' => $o ));
+	}
+
+	// If there are none, we register the widget's existance with a generic template
+	if ( !$id ) {
+		wp_register_sidebar_widget( 'text-1', $name, 'cm_rss_widget', $widget_ops, array( 'number' => -1 ) );
+		wp_register_widget_control( 'text-1', $name, 'cm_rss_widget_control', $control_ops, array( 'number' => -1 ) );
+	}
+}
+cm_rss_widget_register();
+//END RSS WIDGET
+
 //WELCOME BOX
 function cm_widget_welcome($args, $number = 1) {
 	extract($args);

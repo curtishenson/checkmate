@@ -26,7 +26,7 @@ p img { float: none; }
 .wp-smiley { float: none; margin: 0; }
 
 /******  HEADER *****/
-.header { background-color: #222; color:#bbb; padding: 1em 0px 1.5em; z-index: 2;}
+.header { background-color: #222; color:#bbb; padding: 1em 0px 1.5em; z-index: 2; }
 	.header h1 { font-weight: bold; margin-bottom: 0px; font-size: 3.5em;}
 		.header h1 a { text-decoration: none; color: #fff;}
 	.header fieldset { border: none; padding: 0px; margin: 0px;}
@@ -63,8 +63,7 @@ p img { float: none; }
 .sf-js-enabled li li { background: #eee; border-bottom: 1px solid #ccc; }
 	.sf-js-enabled li li:last-child { border-right: none; }
 	.sf-js-enabled li li li { background: #eee; }
-.sf-js-enabled li:hover, .sf-js-enabled li.sfHover,
-.sf-js-enabled a:focus, .sf-js-enabled a:hover, .sf-js-enabled a:active { background:#aaa; outline:0; }
+.sf-js-enabled li:hover, .sf-js-enabled li.sfHover, .sf-js-enabled a:focus, .sf-js-enabled a:hover, .sf-js-enabled a:active { background:#aaa; outline:0; }
 
 /**** FEATURED ****/
 .feature { margin: 1em 0 2em; background-color: #eee; border: 1px solid #ccc; padding: 5px 10px;}
@@ -135,7 +134,7 @@ p img { float: none; }
 	.widget h3 { border-top: 2px solid #aaa; background: #f9f9f9 url('images/down_arrow.png') right no-repeat; border-bottom: 1px solid #ccc; color: #888; padding: 2px 0 5px 2px; font-weight: bold; }
 	.widget ul { margin: 0px; list-style-type: none;}
 		.widget ul ul { margin-left: 10px; }
-		.widget ul li { border-bottom: 1px solid #eee; background-color: #fff; }
+		.widget ul li { border-bottom: 1px solid #eee;  }
 			.widget ul li a { text-decoration: none; }
 			.widget ul li a:hover { color: #222; }
 /* Custom Icon widgets */
@@ -148,11 +147,11 @@ p img { float: none; }
 .widget_news_list ul li { background: url("images/pages.gif") left no-repeat; padding-left: 20px; }
 /* Welcome Box Widget */
 .widget_welcome { background-color: #eee; border: 1px solid #ccc; padding: 5px 10px 0; }
-	.widget_welcome h2{ margin-bottom: 0px;}
+	.widget_welcome h2{ margin-bottom: 0px; font-weight: bold; }
 	.widget_welcome img { float: left; padding-right: 10px; margin: 0 0 0;}
 /* Welcome Box Classic */
 .widget_welcome_classic { background-color: #ccc; padding: 5px 10px 0; }
-	.widget_welcome_classic h2{ margin-bottom: 0px;}
+	.widget_welcome_classic h2{ margin-bottom: 0px; }
 	.widget_welcome_classic p img { float: left; padding-right: 10px; margin: 0 0 0;}
 /* Ads Widget */
 .ads { margin-bottom: 1.5em;}
@@ -160,6 +159,20 @@ p img { float: none; }
 /* Tags */
 .widget_tag_cloud a { text-decoration: none; color: #999; }
 	.widget_tag_cloud a:hover { color: #000; }
+/* RSS Widget */
+.cm_rss_widget { border: 1px solid #ccc; background-color: #f9f9f9; padding: 10px; }
+	.cm_rss_widget img { float: left; margin-right: 10px; }
+	.cm_rss_widget h3 { border-top: none; padding: 0; background: none; color: #FB9D3A; margin-bottom: .4em; }
+	.cm_rss_widget p { margin-bottom: 0px; }
+	
+	.cm_rss_widget ul { margin: 0; margin-bottom: 5px; list-style-type: none; }
+		.cm_rss_widget ul li { border-bottom: none; display: inline; background: url('images/rss_tiny.png') left no-repeat; padding-left: 15px; margin-right: 10px;}
+		.cm_rss_widget ul li:last-child { background: url('images/atom_tiny.png') left no-repeat; padding-left: 15px;}
+			.cm_rss_widget ul li a { color: #333; text-decoration: none; }
+				.cm_rss_widget ul li a:hover { text-decoration: underline; }
+		.cm_rss_widget fieldset { border: none; padding: 0; margin-bottom: 0; }
+			.cm_rss_widget label { color: #555; display: block; }
+			.cm_rss_widget input { width: 260px; text-align: left; margin-top: 0px; border: 1px solid #ccc; padding: 2px 5px;}
 
 /****** SIDEBAR *****/
 .sidebar { padding-top: 3em; }
@@ -175,9 +188,9 @@ p img { float: none; }
 #commentform input { width: 230px; display: block; margin-bottom: 1em; }
 #commentform textarea { width: 300px; height:150px; padding:5px; margin-top: 0px;}
 .required {color: #d85050; font-size: .9em; vertical-align: text-bottom;}
-#commentform button { background: #fff url('images/comment_submit.png') left no-repeat; border: none; height: 2.5em; padding: 4px 5px 2px 30px; font-size: 1em; font-family: Georgia, serif; font-weight: bold;}
+#commentform button { background: transparent url('images/comment_submit.png') left no-repeat; border: none; height: 2.5em; padding: 4px 5px 2px 30px; font-size: 1em; font-family: Georgia, serif; font-weight: bold;}
 #commentform button:hover { cursor: pointer; background-color: #eee; color: #000;}
-#commentform input[type=hidden] { border: none; }
+#commentform input[type=hidden] { border: none; background-color: transparent; }
 #commentform p { text-indent: 0px;}
 
 ol#comments { list-style-type: none; margin: 0 0 1.5em 0; padding-left: 0px; }
@@ -194,21 +207,28 @@ ol#comments { list-style-type: none; margin: 0 0 1.5em 0; padding-left: 0px; }
 .avatar { float: left; margin-bottom: .5em; margin-right: 10px; }
 
 #comments-form + .respond { clear: left; text-indent: 0px; }
-.respond a { color: #999;}
+.respond a { color: #999; }
 
 /**** PAGE ****/
 .page h2 { border-bottom: 1px solid #999; margin-bottom: 0.75em; }
 
 /***** FOOTER ******/
 
+
+/*** CLEARING ***/
+.clearfix:after, .container:after, .cm_rss_widget:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix, .container, .cm_rss_widget {display:inline-block;}
+* html .clearfix, * html .container, * html .cm_rss_widget {height:1%;}
+.clearfix, .container, .cm_rss_widget {display:block;}
+
 /***** MISC POST AND PAGE STYLES *****/
 /* You can use these to images and other elements inside posts or pages */
 .imageframe { margin: 10px; padding: 5px; border: 1px solid #aaa; }
-.alignleft { float: left; margin-right: 10px; }
-.alignright { float: right; margin-left: 10px; }
+.alignleft { float: left; margin: 0px; margin-right: 10px; }
+.alignright { float: right; margin: 0px; margin-left: 10px; }
 
 /***** TABBER TABBED CONTENT *****/
-/*****************  TAB MENU **********************/
+/* TAB MENU */
 .tabbertab ul { list-style-type: none; margin: 0 0 1.5em 0; }
 .tabbertab li { margin-bottom: .2em; background: url('images/link.png') left no-repeat; padding-left: 15px; }
 
@@ -224,7 +244,7 @@ ol#comments { list-style-type: none; margin: 0 0 1.5em 0; padding-left: 0px; }
   .tabber = before the tabber interface is set up
   .tabberlive = after the tabber interface is set up
   --------------------------------------------------*/
-.tabberlive { margin-bottom: 1em; background-color: #fff; }
+.tabberlive { margin-bottom: 1em; background-color: none; }
 .tabberlive sub {display: none;}
 
 /*--------------------------------------------------

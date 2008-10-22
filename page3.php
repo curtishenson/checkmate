@@ -36,6 +36,7 @@ Template Name: Page With Comments
 		
 	<?php cm_sidebar(); ?>
 	
+</div>
 </div><?php //closes container ?>
 
 <?php get_footer(); ?>

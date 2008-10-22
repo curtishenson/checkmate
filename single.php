@@ -17,17 +17,20 @@
 			</div>
 			
 			<?php wp_link_pages('before=<div class="page-links"> Pages: &after=</div>'); ?>
+			
+			<?php cm_after_post(); ?>
 
 			<div class="comments">
 				<?php comments_template(); ?>
 			</div>
 			
-		</div><!-- closes blog -->
+		</div>
 	<?php endwhile; endif; ?>
 		
 	<?php cm_sidebar(); ?>
 
 	
+</div>
 </div><?php //closes container ?>
 
 <?php get_footer(); ?>

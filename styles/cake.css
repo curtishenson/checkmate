@@ -1,0 +1,52 @@
+/* Colors
+brown 774F38
+pinkish E08E79
+creme F1D4AF
+offwhite ECE5CE
+blue C5E0DC
+*/
+h1, h2, h3, h4, h5, h6 {font-weight:normal; color:#774F38; font-family: Georgia, serif;}
+
+a { color: #774F38; }
+a:hover { color: #555;}
+a:visited { color:#777;}
+
+.widget h3, .navigation, .comments-header, .archives .content h3, .page-links { border-top: 2px solid #E08E79; border-bottom: 1px solid #E08E79; background-color: #ECE5CE; color: #774F38; }
+.navigation a { color: #774F38; }
+
+/******  HEADER *****/
+.header { background-color: #774F38; color:#E0E4CC;}
+
+/****** MENU *******/
+#subheader, .sf-js-enabled li li { background-color: #E08E79; }
+.meta ul li a, .menu ul li a:visited { color: #774F38; }
+.menu ul li a:hover { color: #774F38; }
+.menu ul li.current_page_item a, .menu ul li.current_page_item sub{ color: #774F38; }
+
+.sf-js-enabled li:hover, .sf-js-enabled li.sfHover, .sf-js-enabled a:focus, .sf-js-enabled a:hover, .sf-js-enabled a:active { background:#F1D4AF; }
+
+
+/**** FEATURED ****/
+.feature {background-color: #C5E0DC; color: #555; }
+.feature h2 a, .feature a{ color: #774F38; }
+.feature .meta ul li, .feature .meta ul li a, .classic-feature .meta ul li a { color: #774F38; }
+.feature .more-link { color: #774F38; }
+.feature .more-link:hover { color: #222; }
+
+/**** BLOG ****/
+.blog h2 a { color: #774F38;}
+.meta ul li { color: #E08E79; }
+.more-link { color: #E08E79; }
+
+/**** WIDGETS ****/
+.cm_rss_widget { background-color: #774F38; color: #fff; }
+.cm_rss_widget ul li a { color: #F1D4AF; }
+	.cm_rss_widget ul li a:hover { color: #ECE5CE; }
+.cm_rss_widget h3 { border-top: none; padding: 0; background: none; color: #FB9D3A; margin-bottom: .4em; border-bottom: 1px solid #E08E79;  }
+
+/* Welcome Box Widget */
+.widget_welcome { background-color: #F1D4AF; }
+
+/**** COMMENTS ****/
+#comments li.odd { background-color: #F1D4AF;}
+#comments li.even { background-color: #ECE5CE; }

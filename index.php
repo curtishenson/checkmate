@@ -1,9 +1,12 @@
 <?php get_header(); ?>
+
 <div class="container content">
 	
 	<?php cm_left_column() ?>
 		
 	<div class="span-14">
+		
+		
 		<?php	
 		$feature = get_option('cm_feature');  // Gets the option from theme options page
 			if($feature == 'No') { }
@@ -20,7 +23,6 @@
 		<div class="blog">
 			
 			<?php 
-			
 			query_posts($query_string . "&order=DESC");
 				
 			if(have_posts()):
@@ -48,7 +50,7 @@
 				<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
 			</div>
 			
-			<?php  else : ?>
+			<?php else : ?>
 				
 				<h2>Not Found</h2>
 				<p>Sorry, but there were no posts found.</p>

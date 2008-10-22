@@ -30,7 +30,6 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.curvycorners.packed.js"></script> 
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.color.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/tabber-min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/superfish.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/cm_javascript.js"></script>

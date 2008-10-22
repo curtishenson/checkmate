@@ -7,6 +7,12 @@ function get_the_author_posts_link($idmode='') {
     return '<a href="' . get_author_link(0, $authordata->ID, $authordata->user_nicename) . '" title="' . sprintf(__("Posts by %s"), htmlspecialchars(the_author($idmode, false))) . '">' . the_author($idmode, false) . '</a>';
 }
 
+// Inject after Post
+function cm_after_post() {
+	$after_post_code = get_option('cm_afterpost_code');
+	echo stripslashes($after_post_code);
+}
+
 // Left Column for 3 Column Layout
 function cm_left_column() {
 	$layout = get_option('cm_layout');
@@ -51,14 +57,15 @@ function cm_sidebar() {
 	}
 }
 
-// CLASSIC FEATURE CATEGORIES
+// FEATURE CATEGORIES
  
 function cm_feature_post(){
-	global $post;
+	global $post, $feature_post;
 	
 	$feature_cats = get_option('cm_featureId');
-	
-	query_posts(array('category__in' => array($feature_cats)));
+	$feature_array = explode( ",", $feature_cats );
+
+	query_posts(array('category__in' => $feature_array, 'showposts' => 1));
 	
 	if(have_posts()):
 	while(have_posts()) : the_post();

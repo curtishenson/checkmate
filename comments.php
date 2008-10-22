@@ -83,7 +83,7 @@
     /* No comments at all means a simple message instead */ 
 ?>
 
-    <h2 class="comments-header">No Comments Yet</h2>
+    <h3 class="comments-header">No Comments Yet</h3>
 
     <p>Be the first to comment.</p>
     
@@ -112,7 +112,7 @@
         title="Log out of this account">Logout</a></p>
 
 		<button type="submit" name="submit" id="sub">Submit Comment</button>
-	    <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>">
+	    <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
 	
 	</div>
     
@@ -129,7 +129,7 @@
         <input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="22" />
 
 		<button type="submit" name="submit" id="sub">Submit Comment</button>
-        <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>">
+        <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
     </div>
 
     <?php endif; ?>
@@ -161,7 +161,7 @@
     /* This is a loop for printing pingbacks/trackbacks if there are any */
     if ($numPingBacks != 0) : ?>
 
-    <h2 class="comments-header"><a class="show_trackbacks" href="#"><?php _e($numPingBacks); ?> Trackbacks/Pingbacks</a></h2>
+    <h3 class="comments-header"><a class="show_trackbacks" href="#"><?php _e($numPingBacks); ?> Trackbacks/Pingbacks</a></h3>
 	<p><a class="show_trackbacks" href="#">Click to show or hide trackbacks</a></p>
     <ol id="trackbacks">
     
