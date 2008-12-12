@@ -1,4 +1,5 @@
 <div class="span-10 last">
+<div class="span-10 last">
 	<?php if ( !function_exists('dynamic_sidebar')
 			|| !dynamic_sidebar('Sidebar Top') ) : 
 	endif; ?>
@@ -21,4 +22,4 @@
 			|| !dynamic_sidebar('Sidebar Bottom') ) : 
 	endif; ?>
 </div>
-	
+</div>

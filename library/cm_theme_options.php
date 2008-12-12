@@ -2,7 +2,8 @@
 // THEME OPTIONS *************************
 $themename = "Checkmate";
 $shortname = "cm";
-
+$theme_current_version = "2.0";
+$theme_url = "http://curtishenson.com/checkmate";
 
 //Logo Auto Detect
 $logo_path = TEMPLATEPATH . '/images/logo/';
@@ -283,7 +284,34 @@ function mytheme_admin() {
     
 ?>
 <div class="wrap">
-<h2><?php echo $themename; ?> Options</h2>
+<h2 class="updatehook"><?php echo $themename; ?> Options</h2>
+
+<table class="widefat" style="margin: 20px 0;">
+	<thead style="background: #ccc; color: #333;">
+		<tr>
+			<th scope="col" style="width: 50%; font-size: 1.1em;">About Checkmate</th>
+			<th scope="col" style="font-size: 1.1em;">Feed the Developer</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr style="background: #f9f9f9;">
+			<td>
+			This theme is designed and developed by <a href="http://curtishenson.com">Curtis Henson</a> of <a href="http://gruntdesign.com">Grunt</a>.<br /><br />
+			Please go to the <a href="http://curtishenson.tenderapp.com/">Checkmate Support Page</a> for support or to report bugs.</strong>
+			</td>
+			<td>
+			If you enjoy this theme, consider donating an amount of your choice with PayPal.<br />
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="812595">
+			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="">
+			<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+			
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <form method="post">
 
@@ -298,7 +326,7 @@ function mytheme_admin() {
 			
 			<h3><?php echo $value['name']; ?></h3>
 			
-			<table class="form-table">
+			<table class="form-table widefat post fixed">
 		<?php
 		break;
 
@@ -450,6 +478,25 @@ function mytheme_wp_head() { ?>
 <link href="<?php bloginfo('template_directory'); ?>/style.php" rel="stylesheet" type="text/css" />
 <?php }
 
+function mytheme_admin_head(){ 
+	global $theme_current_version;
+	global $theme_url;
+	global $themename;
+	?>
+	<script type="text/javascript">  
+	 jQuery(document).ready(function() {  
+	     jQuery.get('http://curtishenson.com/checkmateversion.txt', function(newversion){  
+			if (<?php echo $theme_current_version; ?> < newversion) {
+	         	jQuery('#wpbody > .wrap > h2.updatehook').after('<div id="message" class="updated fade"><p><strong>Theme Update available. Click <a href="<?php echo $theme_url;?>">here</a> for details.</strong></p></div>');
+				jQuery('#rightnow .youare').after('<p class="themehas"><?php echo $themename; ?> has an <a href="<?php echo $theme_url; ?>">available update</a>.</p>');
+			}  
+	     });  
+	 });  
+	 </script>
+<?php }
+
 add_action('wp_head', 'mytheme_wp_head');
+add_action('admin_head','mytheme_admin_head');
 add_action('admin_menu', 'mytheme_add_admin');
+
 ?>

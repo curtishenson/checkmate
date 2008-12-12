@@ -84,12 +84,12 @@
 ?>
 
     <h3 class="comments-header">No Comments Yet</h3>
-
-    <p>Be the first to comment.</p>
     
 <?php endif; ?>
 
 <?php if (comments_open()) : ?>
+	
+	<p>Be the first to comment.</p>
 
     <div id="comments-form">
     

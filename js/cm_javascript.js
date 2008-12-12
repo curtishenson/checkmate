@@ -20,14 +20,8 @@ function emailInput(text){
 	});
 };
 
-$(document).ready(function(){
-	
-	//drop down menus
-	$('.menu ul').superfish({
-		dropShadows: false
-	}); 
-
-	//rounded corners on feature
+//rounded corners on feature
+function roundedCorners(){
 	$('.classic-feature').corner({
 		tl: { radius: 10 },
 		tr: { radius: 10 },
@@ -44,6 +38,14 @@ $(document).ready(function(){
 		antiAlias: true,
 		autoPad: true,
 		validTags: ["div"] });
+};
+
+$(document).ready(function(){
+	
+	//drop down menus
+	$('.menu ul').superfish({
+		dropShadows: false
+	}); 
 		
 	//widget highlights
 	//requires jquery.color.js to be loaded

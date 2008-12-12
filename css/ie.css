@@ -21,10 +21,10 @@ sub {vertical-align:text-bottom;}
 html>body p code {*white-space:normal;}
 hr {margin:-8px auto 11px;}
 
-.header .container { padding-bottom: 1em;} /* gives padding to the top header */
-
 .menu ul li sub {display: block; font-size: .8em; color: #999; line-height: 1em; margin-top: -2px; } /* fixes page sub headings so they show in IE*/
 
 ul.tabbernav { padding: 2px 0 2px; } /* fixes tabber navigation */
 
 #commentform button { padding: 2px 0px 2px 5px;}
+
+.menu ul li a { text-align: left; }

@@ -124,7 +124,7 @@ foreach ($options as $value) {
 				<ul>
 					<?php 
 					$menupages = get_option('cm_menu_pages');
-					wp_list_pages('title_li=&sort_column=menu_order&include=' . $menupages); ?>
+					wp_list_pages('title_li=&depth=2&sort_column=menu_order&include=' . $menupages); ?>
 				</ul>
 			</div>
 

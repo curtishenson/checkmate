@@ -24,14 +24,19 @@
 <?php	} ?>
 	
 	<div class="span-24">
-	<p>Designed by <a href="http://curtishenson.com/checkmate-a-free-wordpress-theme/">Curtis Henson</a> &copy; 2008</p>
+		<span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dc:title" rel="dc:type"><a href="http://curtishenson.com/checkmate" title="Checkmate - A Refined WordPress Theme">CheckMate</a></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://curtishenson.com/" property="cc:attributionName" rel="cc:attributionURL">Curtis Henson</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons</a>.
 	</div>
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.curvycorners.packed.js"></script> 
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/tabber-min.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/superfish.js"></script>
+<?php $classic = get_option('cm_use_classic');
+ 		if ( $classic == "Yes") { ?>
+			<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.curvycorners.packed.js"></script>
+			<script type="text/javascript">
+				roundedCorners();
+			</script>
+<?php } ?> 
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/plugins.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/cm_javascript.js"></script>
 <script type="text/javascript">
 	searchInput("Type and hit enter to search");
