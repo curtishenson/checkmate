@@ -56,6 +56,8 @@ foreach ($options as $value) {
 		<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/ie6.css" type="text/css" media="screen, projection" />
 	<![endif]-->
 	
+	<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
+	
 	<?php $header_code = get_option('cm_header_code'); 
 			echo stripslashes($header_code); 
 	?>
