@@ -37,7 +37,7 @@
 					</ul>
 				</div>
 
-				<div class="post">
+				<div <?php if (post_class()) post_class(); else echo 'class="post"'; ?>>
 					<?php the_content('Continue Reading'); ?>
 				</div>
 
