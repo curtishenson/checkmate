@@ -16,7 +16,7 @@ Template Name: About
 				
 				<h2><?php the_title(); ?></h2>
 
-				<div class="post">
+				<div <?php if (post_class()) post_class(); else echo 'class="post"'; ?>>
 					<?php the_content(); ?>
 					<?php wp_link_pages('before=<div class="page-links"> Pages: &after=</div>'); ?>
 				</div>
