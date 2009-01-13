@@ -31,7 +31,7 @@ p img { float: none; }
 		.header h1 a { text-decoration: none; color: #fff;}
 	.header fieldset { border: none; padding: 0px; margin: 0px;}
 		.header #searchform label { display: none; }
-		.header input { margin-top: 1.1em; padding: 2px; border: 1px solid #999; background-color: #eee; width:260px;}
+		.header input { margin-top: 1.1em; padding: 2px; border: 1px solid #999; background-color: #e9e9e9; width:260px;}
 
 /**** RSS FEED ****/
 .rss { padding: 0px 0 0 15px; background: url('images/rss_tiny.png') left no-repeat; margin-bottom: 0; font-family: Georgia, serif; font-size: 1em; }
@@ -48,7 +48,7 @@ p img { float: none; }
 		.rssoptions input { width: 260px; text-align: left; margin-top: 0px;}
 
 /****** MENU *******/
-#subheader { background-color: #eee; border-bottom: 1px solid #ddd; border-top: 1px solid #999; }
+#subheader { background-color: #e5e5e5; border-bottom: 1px solid #ddd; border-top: 1px solid #999; }
 .menu { width: 950px; margin: 0 auto; text-align: left; }
 .menu ul { list-style-type: none; font-family: Georgia, serif; font-size: 1.3em; margin: 0; }
 	.menu ul li { display: inline; margin-right: 0px; }
@@ -61,13 +61,13 @@ p img { float: none; }
 
 .sf-js-enabled { float: left; margin-bottom: 1em; }
 	.sf-js-enabled li li a { font-size: .7em; }
-.sf-js-enabled li li { background: #eee; border-bottom: 1px solid #ccc; }
+.sf-js-enabled li li { background: #e9e9e9; border-bottom: 1px solid #ccc; }
 	.sf-js-enabled li li:last-child { border-right: none; }
-	.sf-js-enabled li li li { background: #eee; }
+	.sf-js-enabled li li li { background: #e9e9e9; }
 .sf-js-enabled li:hover, .sf-js-enabled li.sfHover, .sf-js-enabled a:focus, .sf-js-enabled a:hover, .sf-js-enabled a:active { background:#aaa; outline:0; }
 
 /**** FEATURED ****/
-.feature { margin: 1em 0 2em; background-color: #eee; border: 1px solid #ccc; padding: 5px 10px;}
+.feature { margin: 1em 0 2em; background-color: #e9e9e9; border: 1px solid #ccc; padding: 5px 10px;}
 .feature h2, .feature h2 a{ color: #333; font-weight: bold; text-decoration: none; margin-bottom: 0px; }
 	.feature h2 a:hover { color: #000;}
 .feature .meta ul li, .classic-feature .meta ul li a { color: #888; }
@@ -97,7 +97,7 @@ p img { float: none; }
 	.blog h2 a { text-decoration: none; color: #333;}
 		.blog h2 a:hover { color: #888;}
 
-.more-link { font-weight: bold; font-family: Georgia, serif; color: #777; border-top: 1px solid #eee; background: url('images/arrow.png') right 4px no-repeat; padding-right: 17px; text-decoration: none; display: block; margin-top: 1em; text-align: right; clear: both; }
+.more-link { font-weight: bold; font-family: Georgia, serif; color: #777; border-top: 1px solid #ddd; background: url('images/arrow.png') right 4px no-repeat; padding-right: 17px; text-decoration: none; display: block; margin-top: 1em; text-align: right; clear: both; }
 	.more-link:hover { color: #000; }
 	
 .navigation { padding-top: 3px; margin-top: 1em; margin-bottom: 1em; font-family: Georgia, serif; font-weight: bold; font-size: 1.2em; border-top: 2px solid #999; border-bottom: 1px solid #ccc; background-color: #f9f9f9; }
@@ -111,7 +111,7 @@ p img { float: none; }
 		.post h2 { border: none; font-weight: normal; margin-bottom: 0.75em; }
 	.single h2+p { color: #888; font-style: italic; font-family: Georgia, serif; text-indent: 0px;}
 .post ul, .post ol { padding-left: 20px;}
-.page-links { color: #555; border-top: 2px solid #aaa; border-bottom: 1px solid #ccc; background-color: #f5f5f5; padding: 4px 0 4px 2px; margin-bottom: 1em; }
+.page-links { color: #555; border-top: 2px solid #aaa; border-bottom: 1px solid #ccc; background-color: #e9e9e9; padding: 4px 0 4px 2px; margin-bottom: 1em; }
 	.page-links a{ border: 1px solid #999; background-color: #fff; padding: 2px 5px; text-decoration: none; margin: 0 2px; }
 		.page-links a:hover { background-color: #ddd; border-bottom: 1px solid #999; color: #000; }
 
@@ -124,7 +124,7 @@ p img { float: none; }
 .posts_navigation {border: 1px solid #ccc; padding: 2px 5px; margin-bottom: 1.5em; clear: left; }
 /* the .archives class is used in the archives.php template */
 .archives .content { margin-top: 0px; }
-	.archives .content h3 { font-weight: bold; color: #555; background: #f5f5f5 url('images/down_arrow.png') right no-repeat; padding: 5px; border-top: 2px solid #ddd; border-bottom: 1px solid #ccc; }
+	.archives .content h3 { font-weight: bold; color: #555; background: #e9e9e9 url('images/down_arrow.png') right no-repeat; padding: 5px; border-top: 2px solid #ddd; border-bottom: 1px solid #ccc; }
 	.archives .content ul { list-style-type: none; }	
 		.archives .content ul li { border-bottom: 1px solid #ccc; margin-right: 2%; float: left; width: 48%; }
 			.archives .content ul ul li { border-bottom: none; }
@@ -134,10 +134,10 @@ p img { float: none; }
 
 /**** WIDGETS ****/
 .widget { margin-bottom: 1.5em;}
-	.widget h3 { border-top: 2px solid #aaa; background: #f9f9f9 url('images/down_arrow.png') right no-repeat; border-bottom: 1px solid #ccc; color: #888; padding: 5px 0 5px 2px; font-weight: bold; }
+	.widget h3 { border-top: 2px solid #aaa; background: #e9e9e9 url('images/down_arrow.png') right no-repeat; border-bottom: 1px solid #ccc; color: #888; padding: 5px 0 5px 2px; font-weight: bold; }
 	.widget ul { margin: 0px; list-style-type: none;}
 		.widget ul ul { margin-left: 10px; }
-		.widget ul li { border-bottom: 1px solid #eee;  }
+		.widget ul li { border-bottom: 1px solid #e9e9e9;  }
 			.widget ul li a { text-decoration: none; }
 			.widget ul li a:hover { color: #222; }
 /* Custom Icon widgets */
@@ -149,7 +149,7 @@ p img { float: none; }
 .widget_meta ul li { background: url("images/favorite.png") left no-repeat; padding-left: 20px;}
 .widget_news_list ul li { background: url("images/pages.gif") left no-repeat; padding-left: 20px; }
 /* Welcome Box Widget */
-.widget_welcome { background-color: #eee; border: 1px solid #ccc; padding: 5px 10px 0; }
+.widget_welcome { background-color: #e9e9e9; border: 1px solid #ccc; padding: 5px 10px 0; }
 	.widget_welcome h2{ margin-bottom: 0px; font-weight: bold; }
 	.widget_welcome img { float: left; padding-right: 10px; margin: 0 0 0;}
 /* Welcome Box Classic */
@@ -163,7 +163,7 @@ p img { float: none; }
 .widget_tag_cloud a { text-decoration: none; color: #999; }
 	.widget_tag_cloud a:hover { color: #000; }
 /* RSS Widget */
-.cm_rss_widget { border: 1px solid #ccc; background-color: #f9f9f9; padding: 10px; }
+.cm_rss_widget { border: 1px solid #ccc; background-color: #e9e9e9; padding: 10px; }
 	.cm_rss_widget img { float: left; margin-right: 10px; }
 	.cm_rss_widget h3 { border-top: none; padding: 0; background: none; color: #FB9D3A; margin-bottom: .4em; }
 	.cm_rss_widget p { margin-bottom: 0px; }
@@ -183,7 +183,7 @@ p img { float: none; }
 .sidebar_feature { padding-top: 1em;} /* If feature story is shown this pulls widgets up to be level with feature story */
 
 /***** COMMENTS ****/
-.comments-header { font-weight: bold; border-top: 2px solid #aaa; border-bottom: 1px solid #ccc; color: #555; padding: 4px 0 4px 2px; margin-bottom: .5em; background-color: #f5f5f5; }
+.comments-header { font-weight: bold; border-top: 2px solid #aaa; border-bottom: 1px solid #ccc; color: #555; padding: 4px 0 4px 2px; margin-bottom: .5em; background-color: #e9e9e9; }
 	.comments-header + p.smallrss { background: url('images/feed_small.png') left no-repeat; padding-left: 20px; }
 		.comments-header + p.smallrss a:hover { color: #f7941d;}
 		.comments-header + p a { color: #888;}
@@ -193,7 +193,7 @@ p img { float: none; }
 #commentform textarea { width: 300px; height:150px; padding:5px; margin-top: 0px;}
 .required {color: #d85050; font-size: .9em; vertical-align: text-bottom;}
 #commentform button { background: transparent url('images/comment_submit.png') left no-repeat; border: none; height: 2.5em; padding: 4px 5px 2px 30px; font-size: 1em; font-family: Georgia, serif; font-weight: bold;}
-#commentform button:hover { cursor: pointer; background-color: #eee; color: #000;}
+#commentform button:hover { cursor: pointer; background-color: #e9e9e9; color: #000;}
 #commentform input[type=hidden] { border: none; background-color: transparent; }
 #commentform p { text-indent: 0px;}
 
@@ -201,7 +201,6 @@ ol#comments { list-style-type: none; margin: 0 0 1.5em 0; padding-left: 0px; }
 	#comments li { padding: 5px 10px; margin-bottom: 5px; border: 1px solid #ccc;}
 		#comments li.odd { background-color: #f9f9f9;}
 		#comments li.even { background-color: #e9e9e9; }
-		#comments li:hover { background-color: #fff;}
 
 .comment-meta { margin-bottom: 1em;}
 .comment-date { font-size: .9em; color: #999;}
@@ -216,6 +215,7 @@ ol#comments ul.children { margin: 10px 0 0; }
 
 #comments li.thread-even { background-color: #e9e9e9; }
 #comments li.thread-odd { background-color: #f9f9f9; }
+#comments li:hover { background-color: #fff;}
 
 .comment-author img { margin-top: 25px; }
 .comment-author cite { float: left; margin-left: -74px; margin-right: 10px; }

@@ -39,7 +39,7 @@
 				</ul>
 			</div>
 			
-			<div class="post">
+			<div <?php post_class() ?>>
 				<?php the_content('Continue Reading'); ?>
 			</div>
 			
