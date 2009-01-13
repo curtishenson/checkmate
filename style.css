@@ -100,7 +100,7 @@ p img { float: none; }
 .more-link { font-weight: bold; font-family: Georgia, serif; color: #777; border-top: 1px solid #ddd; background: url('images/arrow.png') right 4px no-repeat; padding-right: 17px; text-decoration: none; display: block; margin-top: 1em; text-align: right; clear: both; }
 	.more-link:hover { color: #000; }
 	
-.navigation { padding-top: 3px; margin-top: 1em; margin-bottom: 1em; font-family: Georgia, serif; font-weight: bold; font-size: 1.2em; border-top: 2px solid #999; border-bottom: 1px solid #ccc; background-color: #f9f9f9; }
+.navigation { padding-top: 3px; margin-top: 1em; margin-bottom: 1em; font-family: Georgia, serif; font-weight: bold; font-size: 1.2em; border-top: 2px solid #999; border-bottom: 1px solid #ccc; background-color: #e9e9e9; }
 	.navigation a { text-decoration: none; color: #555; }
 		.navigation a:hover { color: #000; }
 		.navigation .alignleft, .navigation .alignright { margin-bottom: 0px; }
