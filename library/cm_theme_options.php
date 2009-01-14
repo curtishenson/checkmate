@@ -2,8 +2,8 @@
 // THEME OPTIONS *************************
 $themename = "Checkmate";
 $shortname = "cm";
-$theme_current_version = "2.0";
-$theme_url = "http://curtishenson.com/checkmate";
+$theme_current_version = "2.0.1";
+$theme_url = "http://curtishenson.com/checkmate-20-a-free-premium-wordpress-theme/";
 
 //Logo Auto Detect
 $logo_path = TEMPLATEPATH . '/images/logo/';
@@ -294,7 +294,7 @@ function mytheme_admin() {
 		</tr>
 	</thead>
 	<tbody>
-		<tr style="background: #f9f9f9;">
+		<tr style="background: #dfdfdf;">
 			<td>
 			This theme is designed and developed by <a href="http://curtishenson.com">Curtis Henson</a> of <a href="http://gruntdesign.com">Grunt</a>.<br /><br />
 			Please go to the <a href="http://curtishenson.tenderapp.com/">Checkmate Support Page</a> for support or to report bugs.</strong>
@@ -315,8 +315,6 @@ function mytheme_admin() {
 
 <form method="post">
 
-<table class="form-table">
-
 <?php foreach ($options as $value) { 
 	
 	switch ( $value['type'] ) {
@@ -324,9 +322,15 @@ function mytheme_admin() {
 		?>
 			</table>
 			
-			<h3><?php echo $value['name']; ?></h3>
+			<table class="widefat">
 			
-			<table class="form-table widefat post fixed">
+			<thead>
+				<tr>
+					<th scope="col" style="width:20%" class="column-title"><?php echo $value['name']; ?></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			
 		<?php
 		break;
 
@@ -478,6 +482,7 @@ function mytheme_wp_head() { ?>
 <link href="<?php bloginfo('template_directory'); ?>/style.php" rel="stylesheet" type="text/css" />
 <?php }
 
+// Not currently working with 2.7
 function mytheme_admin_head(){ 
 	global $theme_current_version;
 	global $theme_url;
@@ -487,16 +492,15 @@ function mytheme_admin_head(){
 	 jQuery(document).ready(function() {  
 	     jQuery.get('http://curtishenson.com/checkmateversion.txt', function(newversion){  
 			if (<?php echo $theme_current_version; ?> < newversion) {
-	         	jQuery('#wpbody > .wrap > h2.updatehook').after('<div id="message" class="updated fade"><p><strong>Theme Update available. Click <a href="<?php echo $theme_url;?>">here</a> for details.</strong></p></div>');
+	         	jQuery('#wpbody-content .wrap h2').after('<div id="message" class="updated fade"><p><strong>Theme Update available. Click <a href="<?php echo $theme_url;?>">here</a> for details.</strong></p></div>');
 				jQuery('#rightnow .youare').after('<p class="themehas"><?php echo $themename; ?> has an <a href="<?php echo $theme_url; ?>">available update</a>.</p>');
 			}  
 	     });  
 	 });  
 	 </script>
 <?php }
-
+add_action('admin_head','mytheme_admin_head'); 
 add_action('wp_head', 'mytheme_wp_head');
-add_action('admin_head','mytheme_admin_head');
 add_action('admin_menu', 'mytheme_add_admin');
 
 ?>
