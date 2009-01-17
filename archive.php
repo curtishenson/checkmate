@@ -67,7 +67,7 @@
 					</ul>
 				</div>
 
-				<div <?php if (post_class()) post_class(); else echo 'class="post"'; ?>>
+				<div <?php if (function_exists('post_class')) { post_class(); } else { echo 'class="post"'; } ?>>
 					<?php the_content('Continue Reading'); ?>
 				</div>
 

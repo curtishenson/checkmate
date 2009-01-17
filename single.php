@@ -12,7 +12,7 @@
 				<?php printf(__('Posted on %1$s by %2$s in %3$s','checkmate'), get_the_time(__('M j, Y','checkmate')), get_the_author_posts_link(), get_the_category_list(', ')); ?> | <a href="#comments"><?php comments_number(__('0 Comments','checkmate'), __('1 Comment','checkmate'), __('% Comments','checkmate')); ?></a> <?php edit_post_link((__('Edit Post','checkmate')), '| '); ?>
 			</p>
 			
-			<div <?php if (post_class()) post_class(); else echo 'class="post"'; ?>>
+			<div <?php if (function_exists('post_class')) { post_class(); } else { echo 'class="post"'; } ?>>
 				<?php the_content(); ?>
 			</div>
 			
