@@ -482,7 +482,7 @@ function mytheme_wp_head() { ?>
 <link href="<?php bloginfo('template_directory'); ?>/style.php" rel="stylesheet" type="text/css" />
 <?php }
 
-// Not currently working with 2.7
+/* Whoa this hammers my server
 function mytheme_admin_head(){ 
 	global $theme_current_version;
 	global $theme_url;
@@ -500,6 +500,7 @@ function mytheme_admin_head(){
 	 </script>
 <?php }
 add_action('admin_head','mytheme_admin_head'); 
+*/
 add_action('wp_head', 'mytheme_wp_head');
 add_action('admin_menu', 'mytheme_add_admin');
 
