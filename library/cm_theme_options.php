@@ -2,7 +2,7 @@
 // THEME OPTIONS *************************
 $themename = "Checkmate";
 $shortname = "cm";
-$theme_current_version = "2.0.1";
+$theme_current_version = "2.0.2";
 $theme_url = "http://curtishenson.com/checkmate-20-a-free-premium-wordpress-theme/";
 
 //Logo Auto Detect
@@ -491,7 +491,7 @@ function mytheme_admin_head(){
 	<script type="text/javascript">  
 	 jQuery(document).ready(function() {  
 	     jQuery.get('http://curtishenson.com/checkmateversion.txt', function(newversion){  
-			if (<?php echo $theme_current_version; ?> < newversion) {
+			if (<?php echo $theme_current_version; ?> < newversion ) {
 	         	jQuery('#wpbody-content .wrap h2').after('<div id="message" class="updated fade"><p><strong>Theme Update available. Click <a href="<?php echo $theme_url;?>">here</a> for details.</strong></p></div>');
 				jQuery('#rightnow .youare').after('<p class="themehas"><?php echo $themename; ?> has an <a href="<?php echo $theme_url; ?>">available update</a>.</p>');
 			}  

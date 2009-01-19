@@ -18,3 +18,16 @@ version 1.05
 version 1.06
 	- Changed "1 Comments" to "1 Comment"
 	- Fixed the multiple categories as "featured" categories error
+	
+version 2.0
+	- Complete re-working of the theme
+	
+version 2.0.1
+	- Updated for WordPress 2.7
+	- Threaded Comments added
+	
+version 2.0.2 
+	- Trackbacks/Pingbacks style changed
+	- Comments navigation fixed(2.7)
+	- Trackback hiding fixed(2.7)
+	- Upgraded to jQuery 1.3

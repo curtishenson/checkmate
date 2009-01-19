@@ -1,8 +1,8 @@
 /*  
 Theme Name: CheckMate Blog Theme 2.0
-Theme URI: http://curtishenson.com/checkmate-a-free-wordpress-theme/
+Theme URI: http://curtishenson.com/checkmate-20-a-free-premium-wordpress-theme/
 Description: Minimalist Blog Theme
-Version: 2.0.1
+Version: 2.0.2
 Author: Curtis Henson
 Author URI: http://curtishenson.com
 */
@@ -229,7 +229,16 @@ ol#comments ul.children { margin: 10px 0 0; clear: left; }
 #respond .span-8 { width: 288px; }
 	#respond #commentform textarea { width: 280px; }
 	#respond #commentform input { width: 220px; }
+	
+.comments-navigation { margin-bottom: 1em; margin-top: -1em; }
+	.comments-navigation div { margin-bottom: 0px; }
+	.comments-navigation div > a { text-decoration: none; }
+	.comments-navigation div > a:hover { color: #000; }
 
+/* Trackbacks/Pingbacks */
+.show_trackbacks { background: #fff url('images/down_arrow.png') left top no-repeat; padding-left: 20px; border-bottom: 1px solid #ccc; border-top: 1px solid #aaa; margin-bottom: 1em; display: block; text-decoration: none; }
+.trackback div div.vcard cite, .pingback div div.vcard cite { margin-left: 0px; }
+#trackbacks li { border-bottom: 1px solid #999; }
 
 /**** PAGE ****/
 .page h2 { border-bottom: 1px solid #999; margin-bottom: 0.75em; }

@@ -33,17 +33,17 @@ if ( have_comments() ) : ?>
 		<ol id="comments">
 			<?php wp_list_comments(array('avatar_size'=>64, 'reply_text'=>'Reply', 'type'=>'comment')); ?>
 		</ol>
-	
+		
+		<div class="comments-navigation clearfix">
+			<div class="alignleft"><?php previous_comments_link() ?></div>
+			<div class="alignright"><?php next_comments_link() ?></div>
+		</div>
+		
 	<h3 class="comments-header">Trackbacks / Pingbacks</h3>
 	<a href="#" class="show_trackbacks">show trackbacks</a>
-		<ol class="trackback">
+		<ol id="trackbacks">
 			<?php wp_list_comments('type=pings'); ?>
 		</ol>
-
-	<div class="comments-navigation">
-		<div class="alignleft"><?php previous_comments_link() ?></div>
-		<div class="alignright"><?php next_comments_link() ?></div>
-	</div>
  <?php else : // this is displayed if there are no comments so far ?>
 
 	<?php if ('open' == $post->comment_status) : ?>
