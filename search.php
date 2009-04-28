@@ -2,14 +2,14 @@
 
 	
 <div class="container archive">
-		<h2>You searched for "<strong><?php the_search_query(); ?></strong>"</h2>
+		<h2><?php _e('You searched for "<strong><?php the_search_query(); ?></strong>"', 'checkmate'); ?></h2>
 		<div>
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
-		  	<option value=""><?php echo attribute_escape(__('View By Month')); ?></option> 
+		  	<option value=""><?php echo attribute_escape(__('View By Month', 'checkmate')); ?></option> 
 		  	<?php wp_get_archives('type=monthly&format=option&show_post_count=1'); ?></select>
 			
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
-		  	<option value=""><?php echo attribute_escape(__('View By Year')); ?></option> 
+		  	<option value=""><?php echo attribute_escape(__('View By Year', 'checkmate')); ?></option> 
 		  	<?php wp_get_archives('type=yearly&format=option&show_post_count=1'); ?></select>
 		
 			<form action="<?php bloginfo('url'); ?>/" method="get">
@@ -38,20 +38,19 @@
 				</div>
 
 				<div <?php if (function_exists('post_class')) { post_class(); } else { echo 'class="post"'; } ?>>
-					<?php the_content('Continue Reading'); ?>
+					<?php the_content(__('Continue Reading', 'checkmate')); ?>
 				</div>
 
 				<?php endwhile; else : ?>
 
-					<h2>Not Found</h2>
-					<p>Sorry, but there were no posts found.</p>
-					<?php include (TEMPLATEPATH . "/searchform.php"); ?>
+					<h2><?php _e('Not Found', 'checkmate'); ?></h2>
+					<p><?php _e('Sorry, but there were no posts found.', 'checkmate'); ?></p> 
 
 				<?php endif; ?>
 				
 				<div class="navigation clearfix">
-					<span class="alignleft"><?php posts_nav_link('','','&laquo; Previous Entries') ?></span>
-					<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
+					<span class="alignleft"><?php posts_nav_link('','',__('&laquo; Previous Entries', 'checkmate')) ?></span>
+					<span class="alignright"><?php posts_nav_link('',__('Newer Entries &raquo;', 'checkmate'),'') ?></span>
 				</div>
 		</div>
 

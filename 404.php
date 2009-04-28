@@ -5,13 +5,13 @@
 	<?php cm_left_column() ?>
 	
 	<div class="span-14">
-		<h2>404 Error! Sorry but we couldn't find what you are looking for.  Please try the search form or the archives.</h2>
+		<h2><?php _e("404 Error! Sorry but we couldn't find what you are looking for.  Please try the search form or the archives.", 'checkmate'); ?></h2>
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
-		  	<option value=""><?php echo attribute_escape(__('View By Month')); ?></option> 
+		  	<option value=""><?php echo attribute_escape(__('View By Month', 'checkmate')); ?></option> 
 		  	<?php wp_get_archives('type=monthly&format=option&show_post_count=1'); ?></select>
 			
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
-		  	<option value=""><?php echo attribute_escape(__('View By Year')); ?></option> 
+		  	<option value=""><?php echo attribute_escape(__('View By Year', 'checkmate')); ?></option> 
 		  	<?php wp_get_archives('type=yearly&format=option&show_post_count=1'); ?></select>
 		
 			<form action="<?php bloginfo('url'); ?>/" method="get">

@@ -58,12 +58,12 @@ $alt_stylesheets_tmp = array_unshift($alt_stylesheets, "Select a stylesheet:");
 
 $options = array (
 	
-	array(	"name" => "Style Options",
+	array(	"name" => __("Style Options", 'checkmate'),
 			"type" => "subhead"),
 			
 	array(  "name" => "Layout",
 	        "id" => $shortname."_layout",
-			"desc" => "Choose between the more traditional 2 column layout, or a 3 column layout with content centered.",
+			"desc" => __("Choose between the more traditional 2 column layout, or a 3 column layout with content centered.", 'checkmate'),
 	        "std" => "2 Column",
 	        "type" => "select",
 			"options" => array("2 Column", "3 Column")),
@@ -71,41 +71,41 @@ $options = array (
 	//COLOR THEME
 			
 	array(	"name" => "Alternate Theme Stylesheet",
-			"desc" => "Place additional theme stylesheets in the <code>styles/</code> subdirectory to have them automatically detected.",
+			"desc" => __("Place additional theme stylesheets in the <code>styles/</code> subdirectory to have them automatically detected.", 'checkmate'),
 		    "id" => $shortname."_alt_stylesheet",
 		    "std" => "Select a stylesheet:",
 		    "type" => "select",
 		    "options" => $alt_stylesheets),
 		
 	array(	"name" => "Use Custom Logo",
-			"desc" => "Check this box if you wish to use a logo from the list below.",
+			"desc" => __("Check this box if you wish to use a logo from the list below.", 'checkmate'),
 			"id" => $shortname."_use_custom_logo",
 			"std" => "false",
 			"type" => "checkbox"),
 		
 	array(	"name" => "Logo",
-			"desc" => "Upload PNG files to <code>images/logo/</code> to have them automatically detected.",
+			"desc" => __("Upload PNG files to <code>images/logo/</code> to have them automatically detected.", 'checkmate'),
 		    "id" => $shortname."_logo",
 		    "std" => "Select a logo:",
 		    "type" => "select",
 		    "options" => $logos),
 		
  	array(	"name" => "Header Background Image",
- 			"desc" => "Upload image files to <code>images/bg_images/</code> to have them automatically detected.",
+ 			"desc" => __("Upload image files to <code>images/bg_images/</code> to have them automatically detected.", 'checkmate'),
  		    "id" => $shortname."_bg_url",
  		    "std" => "Select a background:",
  		    "type" => "select",
  		    "options" => $bgs),
 
 	array(	"name" => "Header Background Position",
-			"desc" => "Select centered or repeated background.",
+			"desc" => __("Select centered or repeated background.", 'checkmate'),
 		    "id" => $shortname."_bg_position",
 		    "std" => "Repeated:",
 		    "type" => "select",
 		    "options" => array("Centered", "Repeated") ),
 		
 	array(	"name" => "Use Classic Look",
-			"desc" => "Check this box if you wish to use the rounded corner feature story and welcome widget from Checkmate 1.0.",
+			"desc" => __("Check this box if you wish to use the rounded corner feature story and welcome widget from Checkmate 1.0.", 'checkmate'),
 			"id" => $shortname."_use_classic",
 			"std" => "false",
 			"type" => "checkbox"),
@@ -118,14 +118,14 @@ $options = array (
 			"options" => array("Yes", "No")),
 			
 	array(	"name" => "Feature Category ID",
-			"desc" => "Can be multiple categories. Uses a comma separated lists of page ID numbers. e.g. 2,7,12",
+			"desc" => __("Can be multiple categories. Uses a comma separated lists of page ID numbers. e.g. 2,7,12", 'checkmate'),
 			"id" => $shortname."_featureId",
 			"std" => 1,
 			"type" => "text"),
 			
 	//MENU				
 	array ( "name" => "Pages to display in menu",
-			"desc" => "Defaults to all pages. Uses a comma separated lists of page ID numbers. e.g. 1,2,5,6",
+			"desc" => __("Defaults to all pages. Uses a comma separated lists of page ID numbers. e.g. 1,2,5,6", 'checkmate'),
 			"id" => $shortname."_menu_pages",
 			"std" => "",
 			"type" => "text"),
@@ -156,7 +156,7 @@ $options = array (
 			"style" => "width: 500px",
 			"row_style" => "background-color: #ffd7ad;"),
 	array ( "name" => "Feedburner ID Number"		,
-			"desc" => "Your Feedburner ID is used for email subscriptions.",
+			"desc" => __("Your Feedburner ID is used for email subscriptions.", 'checkmate'),
 			"id" => $shortname."_feedburner_id",
 			"std" => "",
 			"type" => "text",
@@ -168,7 +168,7 @@ $options = array (
    			"type" => "subhead"),
 
   	array ( "name" => "Header Code",
-  			"desc" => "If you have code you want to inject into the head of your website, put it here.",
+  			"desc" => __("If you have code you want to inject into the head of your website, put it here.", 'checkmate'),
   			"id" => $shortname."_header_code",
   			"std" => "",
   			"type" => "textarea",
@@ -176,7 +176,7 @@ $options = array (
 								"cols" => "95")),
 
  	 array ( "name" => "Footer Code",
- 	 		"desc" => "If you have code you want to inject into the footer, put it here.",
+ 	 		"desc" => __("If you have code you want to inject into the footer, put it here.", 'checkmate'),
  	 		"id" => $shortname."_footer_code",
  	 		"std" => "",
  	 		"type" => "textarea",
@@ -184,7 +184,7 @@ $options = array (
 								"cols" => "95")),
 								
 	array ( "name" => "After Post Code",
-			"desc" => "If you have code you want to inject after posts on single post pages, put it here.",
+			"desc" => __("If you have code you want to inject after posts on single post pages, put it here.", 'checkmate'),
 			"id" => $shortname."_afterpost_code",
 			"std" => "",
 			"type" => "textarea",
@@ -200,7 +200,7 @@ $options = array (
 			"id" => $shortname."_show_ads",
 			"std" => "",
 			"type" => "select",
-			"desc" => "Turn all ads below on or off.",
+			"desc" => __("Turn all ads below on or off.", 'checkmate'),
 			"options" => array("Yes", "No")),
 			
 	array(   "name" => "Ad One Image URL",

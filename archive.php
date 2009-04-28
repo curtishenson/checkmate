@@ -13,7 +13,7 @@
 		endif; ?>
 		
 		<div class="author span-24 last">
-			<h2>Posts by <?php echo $curauth->display_name; //display name set in user options ?></h2>
+			<h2><?php _e('Posts by ', 'checkmate'); ?><?php echo $curauth->display_name; //display name set in user options ?></h2>
 		
 			<?php 	if (function_exists('get_avatar')) {
 		 			echo get_avatar( $curauth->user_email, '80'); } ?>
@@ -22,24 +22,24 @@
 		</div>
 	<?php } //Category Header
 		elseif (is_category()) { ?>	
-		<h2>You are viewing the <strong><em><?php single_cat_title(); ?></em></strong> category</h2>
+		<h2><?php _e('You are viewing the', 'checkmate'); ?> <strong><em><?php single_cat_title(); ?></em></strong> <?php _e('category', 'checkmate'); ?></h2>
 		
 	<?php } //Tag Header
 		elseif (is_tag()) { ?>	
-		<h2>You are viewing the <strong><em><?php single_tag_title(); ?></em></strong> tag</h2>
+		<h2><?php _e('You are viewing the', 'checkmate'); ?> <strong><em><?php single_tag_title(); ?></em></strong> <?php _e('tag', 'checkmate'); ?></h2>
 		
 	<?php } //Archive Header
 		else { ?>
-		<h2>You are viewing the Archives</h2>
+		<h2><?php _e('You are viewing the Archives', 'checkmate'); ?></h2>
 		<?php } ?>
 		
 		<div>
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
-		  	<option value=""><?php echo attribute_escape(__('View By Month')); ?></option> 
+		  	<option value=""><?php echo attribute_escape(__('View By Month', 'checkmate')); ?></option> 
 		  	<?php wp_get_archives('type=monthly&format=option&show_post_count=1'); ?></select>
 			
 			<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
-		  	<option value=""><?php echo attribute_escape(__('View By Year')); ?></option> 
+		  	<option value=""><?php echo attribute_escape(__('View By Year', 'checkmate')); ?></option> 
 		  	<?php wp_get_archives('type=yearly&format=option&show_post_count=1'); ?></select>
 	
 			<form action="<?php bloginfo('url'); ?>/" method="get">
@@ -62,26 +62,25 @@
 
 				<div class="meta">
 					<ul>
-						<li class="date">Posted On <?php the_time('M j, Y') ?></li>
-						<li class="comment"> | <a href="<?php comments_link(); ?>"><?php comments_number('0 Comments','1 Comment','% Comments'); ?></a></li>
+						<li class="date"><?php _e('Posted On', 'checkmate'); ?> <?php the_time(__('M j, Y', 'checkmate')) ?></li>
+						<li class="comment"> | <a href="<?php comments_link(); ?>"><?php comments_number(__('0 Comments', 'checkmate'),__('1 Comment', 'checkmate'),__('% Comments', 'checkmate')); ?></a></li>
 					</ul>
 				</div>
 
 				<div <?php if (function_exists('post_class')) { post_class(); } else { echo 'class="post"'; } ?>>
-					<?php the_content('Continue Reading'); ?>
+					<?php the_content(__('Continue Reading', 'checkmate')); ?>
 				</div>
 
 				<?php endwhile; else : ?>
 
-					<h2>Not Found</h2>
-					<p>Sorry, but there were no posts found.</p>
-					<?php include (TEMPLATEPATH . "/searchform.php"); ?>
+					<h2><?php _e('Not Found', 'checkmate'); ?></h2>
+					<p><?php _e('Sorry, but there were no posts found.', 'checkmate'); ?></p>
 
 				<?php endif; ?>
 				
 				<div class="navigation clearfix">
-					<span class="alignleft"><?php posts_nav_link('','','&laquo; Previous Entries') ?></span>
-					<span class="alignright"><?php posts_nav_link('','Newer Entries &raquo;','') ?></span>
+					<span class="alignleft"><?php posts_nav_link('','', __('&laquo; Previous Entries', 'checkmate')) ?></span>
+					<span class="alignright"><?php posts_nav_link('',__('Newer Entries &raquo;', 'checkmate'),'') ?></span>
 				</div>
 		</div>
 		

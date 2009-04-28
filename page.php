@@ -23,8 +23,8 @@ Template Name: About
 
 				<?php endwhile; else : ?>
 
-					<h2>Not Found</h2>
-					<p>Sorry, but there were no posts found.</p>
+					<h2><?php _e('Not Found', 'checkmate'); ?></h2>
+					<p><?php _e('Sorry, but there were no posts found.', 'checkmate'); ?></p>
 					<?php include (TEMPLATEPATH . "/searchform.php"); ?>
 
 				<?php endif; ?>

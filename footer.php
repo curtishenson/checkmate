@@ -39,8 +39,8 @@
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/plugins.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/cm_javascript.js"></script>
 <script type="text/javascript">
-	searchInput("Type and hit enter to search");
-	emailInput("Enter your email and hit enter");
+	searchInput(<?php _e("Type and hit enter to search", 'checkmate'); ?>);
+	emailInput(<?php _e("Enter your email and hit enter", 'checkmate'); ?>);
 </script>
 
 <?php 	$footer_code = get_option('cm_footer_code'); 

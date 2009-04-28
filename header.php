@@ -14,11 +14,11 @@ foreach ($options as $value) {
 <head>
 
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-	
+	<?php load_theme_textdomain('checkmate'); ?>
 
 	<title><?php 
 	if (is_home()) { echo bloginfo('name'); } elseif (is_404()) { echo bloginfo('name'). '» 404'; } elseif 
-	(is_search()) { echo bloginfo('name'). ' » Search Results'; } else { echo wp_title(''); } 
+	(is_search()) { echo bloginfo('name') . __(' » Search Results', 'checkmate'); } else { echo wp_title('') . ' - ' . get_bloginfo('name'); } 
 	?></title>
 	
 	<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/screen.css" type="text/css" media="screen, projection" />
@@ -82,23 +82,23 @@ foreach ($options as $value) {
 				<?php include (TEMPLATEPATH . '/searchform.php'); ?>
 				
 					<p class="rss">
-						<a href="#">Subscription Options</a>
+						<a href="#"><?php _e('Subscription Options', 'checkmate'); ?></a>
 					</p>
 					<div class="rssoptions">
 						<ul>
 							<?php $rss_url = get_option('cm_feedburner_address'); 
 								if ($rss_url != "") {
-									echo '<li><a href="' . $rss_url . '"> Articles RSS</a></li>';
+									echo __('<li><a href="' . $rss_url . '"> Articles RSS</a></li>', 'checkmate');
 								} 
 								else { ?>
-							<li><a href="<?php bloginfo('rss2_url'); ?> ">Articles RSS</a></li>
+							<li><a href="<?php bloginfo('rss2_url'); ?> "><?php _e('Articles RSS', 'checkmate'); ?></a></li>
 							<?php } ?>
 							<?php $comments_url = get_option('cm_feedburner_comments'); 
 								if ($comments_url != "") {
-									echo '<li><a href="' . $comments_url . '"> Comments RSS</a></li>';
+									echo __('<li><a href="' . $comments_url . '"> Comments RSS</a></li>', 'checkmate');
 								} 
 								else { ?>
-							<li><a href="<?php bloginfo_rss('comments_rss2_url') ?>">Comments RSS</a></li>
+							<li><a href="<?php bloginfo_rss('comments_rss2_url') ?>"><?php _e('Comments RSS', 'checkmate'); ?></a></li>
 							<?php } ?>
 						</ul>
 
@@ -107,7 +107,7 @@ foreach ($options as $value) {
 								<form id="subscribe" method="post" action="http://www.feedburner.com/fb/a/emailverify" target="popupwindow"
 								onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=<?php echo $fbId; ?>', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
 									<fieldset>
-										<label for="input_subscribe">By Email</label>
+										<label for="input_subscribe"><?php _e('By Email', 'checkmate'); ?></label>
 										<input value="" name="email" id="input_subscribe" type="text" />
 										<input type="hidden" id="submit" name="url" value="http://feeds.feedburner.com/~e?ffid=<?php echo $fbId; ?>"  />
 										<input type="hidden" name="loc" value="en_US"/>
