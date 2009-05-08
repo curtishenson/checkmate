@@ -232,7 +232,7 @@ function cm_widget_welcome_page() {
 			<h2><?php _e('Welcome Box Widgets'); ?></h2>
 			<p style="line-height: 30px;"><?php _e('How many welcome boxes would you like?'); ?>
 			<select id="text-number" name="text-number" value="<?php echo $options['number']; ?>">
-<?php for ( $i = 1; $i < 10; ++$i ) echo "<option value='$i' ".($options['number']==$i ? "selected='selected'" : '').">$i</option>"; ?>
+			<?php for ( $i = 1; $i < 10; ++$i ) echo "<option value='$i' ".($options['number']==$i ? "selected='selected'" : '').">$i</option>"; ?>
 			</select>
 			<span class="submit"><input type="submit" name="welcome-number-submit" id="welcome-number-submit" value="<?php echo attribute_escape(__('Save')); ?>" /></span></p>
 		</form>
@@ -331,7 +331,7 @@ function ch_widget_tabcontent_page() {
 			<h2><?php _e('Tabcontent Widgets'); ?></h2>
 			<p style="line-height: 30px;"><?php _e('How many tab box widgets would you like?'); ?>
 			<select id="tabcontent-number" name="tabcontent-number" value="<?php echo $options['number']; ?>">
-<?php for ( $i = 1; $i < 10; ++$i ) echo "<option value='$i' ".($options['number']==$i ? "selected='selected'" : '').">$i</option>"; ?>
+			<?php for ( $i = 1; $i < 10; ++$i ) echo "<option value='$i' ".($options['number']==$i ? "selected='selected'" : '').">$i</option>"; ?>
 			</select>
 			<span class="submit"><input type="submit" name="tabcontent-number-submit" id="tabcontent-number-submit" value="<?php echo attribute_escape(__('Save')); ?>" /></span></p>
 		</form>
@@ -358,130 +358,129 @@ function ch_widget_tabcontent_register() {
 // thats it for the tabbed content boxes
 
 //CATEGORY WIDGET
-		function cm_widget_category( $args, $widget_args = 1 ) {
-			
-			extract( $args, EXTR_SKIP );
-			if ( is_numeric($widget_args) )
-				$widget_args = array( 'number' => $widget_args );
-			$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
-			extract( $widget_args, EXTR_SKIP );
-			
-			$options = get_option('widget_category');
-			if ( !isset($options[$number]) )
-				return;
+function cm_widget_category( $args, $widget_args = 1 ) {
+		
+		extract( $args, EXTR_SKIP );
+		if ( is_numeric($widget_args) )
+			$widget_args = array( 'number' => $widget_args );
+		$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
+		extract( $widget_args, EXTR_SKIP );
+		
+		$options = get_option('widget_category');
+		if ( !isset($options[$number]) )
+			return;
 
-			$title = $options[$number]['title'];
-			$cat_name = $options[$number]['cat_name'];
-			
+		$title = $options[$number]['title'];
+		$cat_id = $options[$number]['cat_id'];
+		
+	?>
+	<div class="widget widget_category">
+		<?php 	
+			$q = "showposts=5&cat=" . $cat_id;
+			query_posts($q);
 		?>
-		<div class="widget widget_category">
-			<?php 	
-					$id = get_cat_id($cat_name);
-					$q = "showposts=5&cat=" . $id;
-					query_posts($q);
-			?>
-				<?php if ( !empty( $title ) ) { echo $before_title . $title . $after_title; } ?>
-					
-				<ul>
-					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-					<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> - <small><?php the_time('F j, Y'); ?></small></li>
-					<?php endwhile; else: ?>
-					<li>There are no posts at this time.</li>
-					<?php endif; ?>
-				</ul>
+		<?php if ( !empty( $title ) ) { echo $before_title . $title . $after_title; } ?>
+				
+			<ul>
+				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+				<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a> - <small><?php the_time('F j, Y'); ?></small></li>
+				<?php endwhile; else: ?>
+				<li>There are no posts at this time.</li>
+				<?php endif; ?>
+			</ul>
+		
+			<p class="more">
+				<a href="<?php if (!empty($id)) { echo get_category_link($id); } ?>" class="more-link">More <?php echo $title; ?></a>
+			</p>
+	</div>
+	<?php
+}
 			
-				<p class="more">
-					<?php 	$id = get_cat_id($cat_name); ?>
-					<a href="<?php echo get_category_link($id);?>" class="more-link">More <?php echo $title; ?></a>
-				</p>
-		</div>
-		<?php
+function cm_widget_category_control($widget_args) {
+	global $wp_registered_widgets;
+	static $updated = false;
+
+	if ( is_numeric($widget_args) )
+		$widget_args = array( 'number' => $widget_args );
+	$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
+	extract( $widget_args, EXTR_SKIP );
+
+	$options = get_option('widget_category');
+	if ( !is_array($options) )
+		$options = array();
+
+	if ( !$updated && !empty($_POST['sidebar']) ) {
+		$sidebar = (string) $_POST['sidebar'];
+
+		$sidebars_widgets = wp_get_sidebars_widgets();
+		if ( isset($sidebars_widgets[$sidebar]) )
+			$this_sidebar =& $sidebars_widgets[$sidebar];
+		else
+			$this_sidebar = array();
+
+		foreach ( $this_sidebar as $_widget_id ) {
+			if ( 'cm_widget_category' == $wp_registered_widgets[$_widget_id]['callback'] && isset($wp_registered_widgets[$_widget_id]['params'][0]['number']) ) {
+				$widget_number = $wp_registered_widgets[$_widget_id]['params'][0]['number'];
+				if ( !in_array( "cat_name-$widget_number", $_POST['widget-id'] ) ) // the widget has been removed.
+					unset($options[$widget_number]);
+			}
+		}
+
+		foreach ( (array) $_POST['widget-category'] as $widget_number => $widget_category ) {
+			$title = strip_tags(stripslashes($widget_category['title']));
+			$cat_id = strip_tags(stripslashes( $widget_category['cat_id']  ));
+			$options[$widget_number] = compact( 'title', 'cat_id' );
+		}
+
+		update_option('widget_category', $options);
+		$updated = true;
 	}
-			
-		function cm_widget_category_control($widget_args) {
-			global $wp_registered_widgets;
-			static $updated = false;
 
-			if ( is_numeric($widget_args) )
-				$widget_args = array( 'number' => $widget_args );
-			$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
-			extract( $widget_args, EXTR_SKIP );
-
-			$options = get_option('widget_category');
-			if ( !is_array($options) )
-				$options = array();
-
-			if ( !$updated && !empty($_POST['sidebar']) ) {
-				$sidebar = (string) $_POST['sidebar'];
-
-				$sidebars_widgets = wp_get_sidebars_widgets();
-				if ( isset($sidebars_widgets[$sidebar]) )
-					$this_sidebar =& $sidebars_widgets[$sidebar];
-				else
-					$this_sidebar = array();
-
-				foreach ( $this_sidebar as $_widget_id ) {
-					if ( 'cm_widget_category' == $wp_registered_widgets[$_widget_id]['callback'] && isset($wp_registered_widgets[$_widget_id]['params'][0]['number']) ) {
-						$widget_number = $wp_registered_widgets[$_widget_id]['params'][0]['number'];
-						if ( !in_array( "cat_name-$widget_number", $_POST['widget-id'] ) ) // the widget has been removed.
-							unset($options[$widget_number]);
-					}
-				}
-
-				foreach ( (array) $_POST['widget-category'] as $widget_number => $widget_category ) {
-					$title = strip_tags(stripslashes($widget_category['title']));
-					$cat_name = strip_tags(stripslashes( $widget_category['cat_name']  ));
-					$options[$widget_number] = compact( 'title', 'cat_name' );
-				}
-
-				update_option('widget_category', $options);
-				$updated = true;
-			}
-
-			if ( -1 == $number ) {
-				$title = '';
-				$cat_name = '';
-				$number = '%i%';
-			} else {
-				$title = attribute_escape($options[$number]['title']);
-				$cat_name = format_to_edit($options[$number]['cat_name']);
-			}
-		?>
-				<p>
-					<label>Category Widget Title</label>
-					<input class="widefat" id="video-title-<?php echo $number; ?>" name="widget-category[<?php echo $number; ?>][title]" type="text" value="<?php echo $title; ?>" />
-					<label>Category Name</label>
-					<input class="widefat" id="video-cat_name-<?php echo $number; ?>" name="widget-category[<?php echo $number; ?>][cat_name]" type="text" value="<?php echo $cat_name; ?>" />
-					<input type="hidden" name="widget-category[<?php echo $number; ?>][submit]" value="1" />
-				</p>
-		<?php
-		}
+	if ( -1 == $number ) {
+		$title = '';
+		$cat_id = '';
+		$number = '%i%';
+	} else {
+		$title = attribute_escape($options[$number]['title']);
+		$cat_id = attribute_escape($options[$number]['cat_id']);
+	}
+?>
+		<p>
+			<label>Category Widget Title</label>
+			<input class="widefat" id="category-title-<?php echo $number; ?>" name="widget-category[<?php echo $number; ?>][title]" type="text" value="<?php echo $title; ?>" />
+		</p><p>
+			<label>Category Name</label>
+			<?php wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'widget-category['.$number.'][cat_id]', 'orderby' => 'name', 'selected' => $cat_id, 'hierarchical' => true, 'class' => 'widefat', 'show_count' => true)); ?>
+			<input type="hidden" name="widget-category[<?php echo $number; ?>][submit]" value="1" />
+		</p>
+<?php
+}
 		
 		
-		function cm_widget_category_register() {
-			if ( !$options = get_option('widget_category') )
-				$options = array();
-			$widget_ops = array('classname' => 'widget_category', 'description' => __('Category Widget'));
-			$control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'category');
-			$name = __('CheckMate Category');
+function cm_widget_category_register() {
+	if ( !$options = get_option('widget_category') )
+		$options = array();
+	$widget_ops = array('classname' => 'widget_category', 'description' => __('The category widget displays post titles from the selected category.'));
+	$control_ops = array('width' => 400, 'height' => 350, 'id_base' => 'category');
+	$name = __('CheckMate Category');
 
-			$id = false;
-			foreach ( array_keys($options) as $o ) {
-				// Old widgets can have null values for some reason
-				if ( !isset($options[$o]['title']) || !isset($options[$o]['cat_name']) )
-					continue;
-				$id = "category-$o"; // Never never never translate an id
-				wp_register_sidebar_widget($id, $name, 'cm_widget_category', $widget_ops, array( 'number' => $o ));
-				wp_register_widget_control($id, $name, 'cm_widget_category_control', $control_ops, array( 'number' => $o ));
-			}
+	$id = false;
+	foreach ( array_keys($options) as $o ) {
+		// Old widgets can have null values for some reason
+		if ( !isset($options[$o]['title']) || !isset($options[$o]['cat_id']) )
+			continue;
+		$id = "category-$o"; // Never never never translate an id
+		wp_register_sidebar_widget($id, $name, 'cm_widget_category', $widget_ops, array( 'number' => $o ));
+		wp_register_widget_control($id, $name, 'cm_widget_category_control', $control_ops, array( 'number' => $o ));
+	}
 
-			// If there are none, we register the widget's existance with a generic template
-			if ( !$id ) {
-				wp_register_sidebar_widget( 'video-1', $name, 'cm_widget_category', $widget_ops, array( 'number' => -1 ) );
-				wp_register_widget_control( 'video-1', $name, 'cm_widget_category_control', $control_ops, array( 'number' => -1 ) );
-			}
-		}
-	
-		cm_widget_category_register();
-// END VIDEO WIDGET
+	// If there are none, we register the widget's existance with a generic template
+	if ( !$id ) {
+		wp_register_sidebar_widget( 'category-1', $name, 'cm_widget_category', $widget_ops, array( 'number' => -1 ) );
+		wp_register_widget_control( 'category-1', $name, 'cm_widget_category_control', $control_ops, array( 'number' => -1 ) );
+	}
+}
+
+cm_widget_category_register();
+// END CATEGORY WIDGET
 ?>

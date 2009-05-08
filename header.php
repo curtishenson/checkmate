@@ -17,8 +17,10 @@ foreach ($options as $value) {
 	<?php load_theme_textdomain('checkmate'); ?>
 
 	<title><?php 
-	if (is_home()) { echo bloginfo('name'); } elseif (is_404()) { echo bloginfo('name'). '» 404'; } elseif 
-	(is_search()) { echo bloginfo('name') . __(' » Search Results', 'checkmate'); } else { echo wp_title('') . ' - ' . get_bloginfo('name'); } 
+		if (is_home()) { echo bloginfo('name'); } 
+		elseif (is_404()) { echo bloginfo('name'). '» 404'; } 
+		elseif (is_search()) { echo bloginfo('name') . __(' » Search Results', 'checkmate'); } 
+		else { echo wp_title('') . ' - ' . get_bloginfo('name'); } 
 	?></title>
 	
 	<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/screen.css" type="text/css" media="screen, projection" />
