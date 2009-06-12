@@ -143,8 +143,8 @@ function cm_rss_widget_register() {
 
 	// If there are none, we register the widget's existance with a generic template
 	if ( !$id ) {
-		wp_register_sidebar_widget( 'text-1', $name, 'cm_rss_widget', $widget_ops, array( 'number' => -1 ) );
-		wp_register_widget_control( 'text-1', $name, 'cm_rss_widget_control', $control_ops, array( 'number' => -1 ) );
+		wp_register_sidebar_widget( 'rss-1', $name, 'cm_rss_widget', $widget_ops, array( 'number' => -1 ) );
+		wp_register_widget_control( 'rss-1', $name, 'cm_rss_widget_control', $control_ops, array( 'number' => -1 ) );
 	}
 }
 cm_rss_widget_register();
@@ -258,7 +258,56 @@ function cm_widget_welcome_register() {
 }
 cm_widget_welcome_register();
 //END WELCOME BOX
+/*
+class CM_Widget_Welcome extends WP_Widget {
+	function CM_Widget_Welcome(){
+		$widget_ops = array('classname' => 'widget_welcome', 'description' => __('Stylized box in the sidebar'));
+		$control_ops = array('width' => 400, 'height' => 350);
+		$this->WP_Widget('cm_text_box', __('Checkmate Text Box'), $widget_ops, $control_ops);
+	}
+	
+	function widget( $args, $instance ) {
+		extract($args);
+		$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
+		$image = $instance['image'];
+		$text = apply_filters( 'widget_text', $instance['text'] );
+	   		echo '<div class="widget widget_welcome clearfix">';
+	   			if ( !empty( $title) ){ echo '<h2>' . $title . '</h2>'; } 
+				if ( !empty( $image ) ) { echo '<img src="' . $image . '" //>'; }
+	   			echo $instance['filter'] ? wpautop($text) : $text; 
+	   		echo '</div>';
+	}
+	
+	function update ( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+		if ( current_user_can('unfiltered_html') )
+			$instance['text'] =  $new_instance['text'];
+		else
+			$instance['text'] = wp_filter_post_kses( $new_instance['text'] );
+		$instance['filter'] = isset($new_instance['filter']);
+		$instance['image'] = $new_instance['image'];
+		return $instance;
+	}
+	
+	function form( $instance ) {
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'image' => '', 'text' => '' ) );
+		$title = strip_tags($instance['title']);
+		$image = $instance['image'];
+		$text = format_to_edit($instance['text']);
+		?>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></p>
+		<p><label for="<?php echo $this->get_field_id('image'); ?>"><?php _e('Image:'); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id('image'); ?>" name="<?php echo $this->get_field_name('image'); ?>" type="text" value="<?php echo esc_attr($image); ?>" /></p>
+		<textarea class="widefat" rows="16" cols="20" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
+		<p><input id="<?php echo $this->get_field_id('filter'); ?>" name="<?php echo $this->get_field_name('filter'); ?>" type="checkbox" <?php checked($instance['filter']); ?> />&nbsp;<label for="<?php echo $this->get_field_id('filter'); ?>"><?php _e('Automatically add paragraphs.'); ?></label></p>
+		<?php
+	}
+}
 
+register_widget('CM_Widget_Welcome');
+*/
 //Ads Widget 125x125 by 3
 function cm_widget_ads() {
 ?>

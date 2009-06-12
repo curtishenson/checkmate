@@ -26,7 +26,7 @@ Template Name: Archives
 			</div>
 			
 			<div class="">
-				<h3><?php _e('View By Cateogory', 'checkmate'); ?></h3>
+				<h3><?php _e('View By Category', 'checkmate'); ?></h3>
 				<ul class="clearfix">
 					<?php wp_list_categories('title_li=&show_count=1&hierarchical='); ?>
 				</ul>
