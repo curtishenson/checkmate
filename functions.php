@@ -7,8 +7,12 @@ define('CMLIB', TEMPLATEPATH . '/library');
 require_once(CMLIB . '/cm_functions.php');
 
 // Custom Widgets
+if (!class_exists('WP_Widget')) {
+require_once (CMLIB . '/cm_widgets_27.php');
+} 
+if (class_exists('WP_Widget')) {
 require_once(CMLIB . '/cm_widgets.php');
-
+}
 // Load Widget Areas
 require_once(CMLIB . '/cm_widget_areas.php');
 
