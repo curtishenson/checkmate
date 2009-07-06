@@ -35,3 +35,7 @@ version 2.0.2
 version 2.0.3 
 	- Added Localization
 	- Changed title structure for single post pages
+	
+version 2.0.4
+	- Converted Widgets to 2.8 API 
+	- Fixed bugs in widgets

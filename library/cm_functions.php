@@ -97,24 +97,16 @@ function cm_feature_post(){
 // CLASSIC FEATURE CATEGORIES
  
 function cm_classic_feature_post(){
-	global $wpdb, $post;
+	global $post, $feature_post;
 	
 	$feature_cats = get_option('cm_featureId');
-			
-	$querystr =	"SELECT * FROM $wpdb->posts
-		LEFT JOIN $wpdb->postmeta ON($wpdb->posts.ID = $wpdb->postmeta.post_id)
-		LEFT JOIN $wpdb->term_relationships ON($wpdb->posts.ID = $wpdb->term_relationships.object_id)
-		LEFT JOIN $wpdb->term_taxonomy ON($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
-		WHERE $wpdb->term_taxonomy.term_id IN ($feature_cats)
-		AND $wpdb->term_taxonomy.taxonomy = 'category'
-		AND $wpdb->posts.post_status = 'publish'
-		AND $wpdb->posts.post_type = 'post'
-		ORDER BY $wpdb->posts.post_date DESC
-		LIMIT 1";
+	$feature_array = explode( ",", $feature_cats );
+
+	query_posts(array('category__in' => $feature_array, 'showposts' => 1));
 	
-	$featurepost = $wpdb->get_results($querystr);
-	foreach ($featurepost as $post):
-	setup_postdata($post);
+	if(have_posts()):
+	while(have_posts()) : the_post();
+	
 	$feature_post = $post->ID;
 
 	?>
@@ -136,7 +128,7 @@ function cm_classic_feature_post(){
 				<?php the_content('Continue Reading'); ?>
 			
 		</div>
-	<?php endforeach;
+	<?php endwhile; endif;
 }
 
 ?>
