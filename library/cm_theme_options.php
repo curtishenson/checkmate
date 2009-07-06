@@ -2,7 +2,7 @@
 // THEME OPTIONS *************************
 $themename = "Checkmate";
 $shortname = "cm";
-$theme_current_version = "2.0.2";
+$theme_current_version = "2.0.4";
 $theme_url = "http://curtishenson.com/checkmate-20-a-free-premium-wordpress-theme/";
 
 //Logo Auto Detect
