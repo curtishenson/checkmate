@@ -79,8 +79,8 @@
 				<?php endif; ?>
 				
 				<div class="navigation clearfix">
-					<span class="alignleft"><?php posts_nav_link('','', __('&laquo; Previous Entries', 'checkmate')) ?></span>
-					<span class="alignright"><?php posts_nav_link('',__('Newer Entries &raquo;', 'checkmate'),'') ?></span>
+					<span class="alignleft"><?php next_posts_link('« Previous Entries', '0') ?></span>
+					<span class="alignright"><?php previous_posts_link('Next Entries »', '0'); ?></span>
 				</div>
 		</div>
 		
